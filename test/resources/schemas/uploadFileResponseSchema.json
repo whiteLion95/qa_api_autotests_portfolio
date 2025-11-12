@@ -1,0 +1,32 @@
+{
+  "title": "upload-file response schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "message": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "path",
+        "name"
+      ]
+    }
+  },
+  "required": [
+    "success",
+    "message",
+    "data"
+  ]
+}

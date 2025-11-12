@@ -1,0 +1,31 @@
+{
+  "title": "car-models response schema",
+  "type": "array",
+  "minItems": 1,
+  "uniqueItems": true,
+  "items": {
+    "type": "object",
+    "properties": {
+      "model_id": {
+        "type": "integer"
+      },
+      "mark_id": {
+        "type": "integer"
+      },
+      "title": {
+        "type": "string"
+      },
+      "alias": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "model_id",
+      "mark_id",
+      "title",
+      "alias",
+      "created_at",
+      "updated_at"
+    ]
+  }
+}

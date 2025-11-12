@@ -1,0 +1,38 @@
+{
+    "issueTariffs": {
+        "success": true,
+        "message": "Success!"
+    },
+    "getCar": {
+        "success": true,
+        "message": "Данные успешно получены!"
+    },
+    "getCarAveragePrice": {
+        "success": true,
+        "message": "Данные успешно получены!"
+    },
+    "setPolicy": {
+        "success": true,
+        "message": "Полис успешно выписан!"
+    },
+    "cancelPolicy": {
+        "message": "Полис помечен ошибкой оператора."
+    },
+    "setPolicyTWB": {
+        "status": 1
+    },
+    "setCancellationTWB": {
+        "status": 1
+    },
+    "startSetPolicyWaiting": {
+        "status": 1,
+        "message": "Success"
+    },
+    "uploadFile": {
+        "success": true,
+        "message": "Файл успешно загружен в хранилище"
+    },
+    "getFile": {
+        "success": true
+    }
+}

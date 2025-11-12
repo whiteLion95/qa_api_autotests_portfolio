@@ -1,0 +1,33 @@
+{
+  "title": "get-file response schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "message": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        },
+        "file": {
+          "type": "string",
+          "contentEncoding": "base64"
+        }
+      },
+      "required": [
+        "path",
+        "file"
+      ]
+    }
+  },
+  "required": [
+    "success",
+    "message",
+    "data"
+  ]
+}

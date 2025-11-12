@@ -1,0 +1,40 @@
+{
+    "auth": {
+        "login": "api/login",
+        "testUsers": "api/auth/test-users"
+    },
+    "dictionary": {
+        "verifyBool": "api/dictionary/settings/verify_bool",
+        "servers": "api/dictionary/settings/5",
+        "carMarks": "api/dictionary/car-marks",
+        "carModels": "api/dictionary/car-models",
+        "testCars": "api/dictionary/test-cars",
+        "testClients": "api/dictionary/test-clients",
+        "weekendGetWorkDay": "api/dictionary/weekend/get-work-day",
+        "ESBD": "api/dictionary/settings/key/esbd"
+    },
+    "ones": {
+        "callMethod": "api/ones/v2/ones/call-method"
+    },
+    "ESBD": {
+        "callMethod": "api/esbd/call-method"
+    },
+    "TWB": {
+        "startSetPolicyWaiting": "StartSetPolicyWaiting",
+        "getPolicy": "GetPolicy",
+        "setPolicy": "SetPolicy",
+        "setCancellation": "SetCancellation"
+    },
+    "KASKO": {
+        "getCarAveragePrice": "api/kasko/get-car-average-price",
+        "issueTariffs": "api/kasko/issue/tariffs",
+        "getCar": "api/kasko/get-car",
+        "setPolicy": "api/kasko/set-policy",
+        "policies": "api/kasko/policies",
+        "cancelPolicy": "api/kasko/cancel-policy",
+        "uploadFile": "api/kasko/upload-file"
+    },
+    "docs": {
+        "getFile": "api/docs/get-file"
+    }
+}

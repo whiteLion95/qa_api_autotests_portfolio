@@ -1,0 +1,254 @@
+{
+  "title": "issue/tariffs response schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "data": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "array",
+        "minItems": 1,
+        "uniqueItems": true,
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "product_code": {
+              "type": "integer"
+            },
+            "agent_commission": {
+              "type": [
+                "integer",
+                "number"
+              ]
+            },
+            "tarif": {
+              "type": "number"
+            },
+            "franchise_damage": {
+              "type": "string"
+            },
+            "coef_damage": {
+              "type": "number"
+            },
+            "operator_damage": {
+              "type": "string"
+            },
+            "min_sum_damage": {
+              "type": "integer"
+            },
+            "franchise_loss": {
+              "type": "string"
+            },
+            "coef_loss": {
+              "type": "number"
+            },
+            "operator_loss": {
+              "type": [
+                "null",
+                "string"
+              ]
+            },
+            "loss_threshold_type_id": {
+              "type": "integer"
+            },
+            "min_sum_loss": {
+              "type": [
+                "null",
+                "integer"
+              ]
+            },
+            "min_insurance_sum": {
+              "type": "integer"
+            },
+            "max_insurance_sum": {
+              "type": "integer"
+            },
+            "gai_order_limit_sum": {
+              "type": [
+                "integer",
+                "null"
+              ]
+            },
+            "with_amortization": {
+              "type": "integer"
+            },
+            "insurance_payment_condition_id": {
+              "type": "integer"
+            },
+            "car_year_from": {
+              "type": "integer"
+            },
+            "car_year_to": {
+              "type": "integer"
+            },
+            "deleted_at": {
+              "type": "null"
+            },
+            "program_id": {
+              "type": "integer"
+            },
+            "periods": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "integer"
+                  },
+                  "program_id": {
+                    "type": "integer"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "coefficient": {
+                    "type": [
+                      "number",
+                      "integer"
+                    ]
+                  },
+                  "max_payments": {
+                    "type": "integer"
+                  },
+                  "max_tariff": {
+                    "type": "null"
+                  },
+                  "created_at": {
+                    "type": "null"
+                  },
+                  "updated_at": {
+                    "type": "null"
+                  },
+                  "type": {
+                    "type": "integer"
+                  },
+                  "min_months": {
+                    "type": "null"
+                  },
+                  "max_months": {
+                    "type": "null"
+                  }
+                },
+                "required": [
+                  "id",
+                  "program_id",
+                  "title",
+                  "coefficient",
+                  "max_payments",
+                  "max_tariff",
+                  "created_at",
+                  "updated_at",
+                  "type",
+                  "min_months",
+                  "max_months"
+                ]
+              }
+            },
+            "insurance_payment_condition": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "print_title": {
+                  "type": "string"
+                },
+                "value_1c": {
+                  "type": "string"
+                },
+                "default_coefficient": {
+                  "type": "integer"
+                },
+                "created_at": {
+                  "type": "string"
+                },
+                "updated_at": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "id",
+                "title",
+                "print_title",
+                "value_1c",
+                "default_coefficient",
+                "created_at",
+                "updated_at"
+              ]
+            },
+            "insurance_sums": {
+              "type": "string"
+            },
+            "car_years": {
+              "type": "string"
+            },
+            "premium": {
+              "type": "integer"
+            },
+            "product_title": {
+              "type": "string"
+            },
+            "max_period_type": {
+              "type": "integer"
+            },
+            "can_set_policy_today": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "id",
+            "product_code",
+            "agent_commission",
+            "tarif",
+            "franchise_damage",
+            "coef_damage",
+            "operator_damage",
+            "min_sum_damage",
+            "franchise_loss",
+            "coef_loss",
+            "operator_loss",
+            "loss_threshold_type_id",
+            "min_sum_loss",
+            "min_insurance_sum",
+            "max_insurance_sum",
+            "gai_order_limit_sum",
+            "with_amortization",
+            "insurance_payment_condition_id",
+            "car_year_from",
+            "car_year_to",
+            "deleted_at",
+            "program_id",
+            "periods",
+            "insurance_payment_condition",
+            "insurance_sums",
+            "car_years",
+            "premium",
+            "product_title",
+            "max_period_type",
+            "can_set_policy_today"
+          ]
+        }
+      }
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "success",
+    "data",
+    "message"
+  ]
+}

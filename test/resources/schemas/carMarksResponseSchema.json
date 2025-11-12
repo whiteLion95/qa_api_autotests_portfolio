@@ -1,0 +1,32 @@
+{
+  "title": "car-marks response schema",
+  "type": "array",
+  "minItems": 1,
+  "uniqueItems": true,
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "title": {
+        "type": "string"
+      },
+      "alias": {
+        "type": "string"
+      },
+      "is_excluded": {
+        "type": "integer",
+        "enum": [ 0, 1 ]
+      }
+    },
+    "required": [
+      "id",
+      "title",
+      "alias",
+      "is_excluded",
+      "created_at",
+      "updated_at"
+    ]
+  }
+}

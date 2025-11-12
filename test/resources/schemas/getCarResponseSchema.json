@@ -1,0 +1,124 @@
+{
+  "title": "get-car response schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "type_id": {
+          "type": "integer"
+        },
+        "vin": {
+          "type": "string"
+        },
+        "reg_num": {
+          "type": "string"
+        },
+        "reg_cert_num": {
+          "type": "string"
+        },
+        "dt_reg_cert": {
+          "type": "string"
+        },
+        "year": {
+          "type": "string"
+        },
+        "region_id": {
+          "type": "integer"
+        },
+        "big_city_bool": {
+          "type": "integer"
+        },
+        "color": {
+          "type": "string"
+        },
+        "engine_number": {
+          "type":"string"
+        },
+        "engine_power": {
+          "type": "integer"
+        },
+        "engine_volume": {
+          "type": "integer"
+        },
+        "model_id": {
+          "type": "integer"
+        },
+        "model": {
+          "type": "string"
+        },
+        "mark_id": {
+          "type": "integer"
+        },
+        "mark": {
+          "type": "string"
+        },
+        "n_places": {
+          "type": "integer"
+        },
+        "verified_bool": {
+          "type": "integer"
+        },
+        "dt_verified": {
+          "type": "string"
+        },
+        "owner_kato": {
+          "type": "string"
+        },
+        "chassis_num": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "body_num": {
+          "type": "string"
+        },
+        "right_hand_drive_bool": {
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "type_id",
+        "vin",
+        "reg_num",
+        "reg_cert_num",
+        "dt_reg_cert",
+        "year",
+        "region_id",
+        "big_city_bool",
+        "color",
+        "engine_number",
+        "engine_power",
+        "engine_volume",
+        "model_id",
+        "model",
+        "mark_id",
+        "mark",
+        "n_places",
+        "verified_bool",
+        "dt_verified",
+        "owner_kato",
+        "chassis_num",
+        "category",
+        "body_num",
+        "right_hand_drive_bool"
+      ]
+    },
+    "message": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "success",
+    "data",
+    "message"
+  ]
+}
