@@ -1,16 +1,23 @@
-const path = require('path');
-const BaseAPI = require('../../main/utils/API/baseAPI');
-const JSONLoader = require('../../main/utils/data/JSONLoader');
-require('dotenv').config({ path: path.join(__dirname, '../../../', '.env.test'), override: true });
+const path = require("path");
+const { BaseAPI } = require("@amanat-qa/utils-backend");
+const JSONLoader = require("../../main/utils/data/JSONLoader");
+require("dotenv").config({
+  path: path.join(__dirname, "../../../", ".env.test"),
+  override: true,
+});
 
 class TWBAPI extends BaseAPI {
-  constructor(options = {
-    baseURL: '' || process.env.ONES_HOST_REST_URL,
-    timeout: JSONLoader.APIConfigData.timeout,
-    headers: {
-      Authorization: `Basic ${btoa(`${'' || process.env.ONES_LOGIN}:${'' || process.env.ONES_PASSWORD}`)}`,
-    },
-  }) {
+  constructor(
+    options = {
+      baseURL: "" || process.env.ONES_HOST_REST_URL,
+      timeout: JSONLoader.APIConfigData.timeout,
+      headers: {
+        Authorization: `Basic ${btoa(
+          `${"" || process.env.ONES_LOGIN}:${"" || process.env.ONES_PASSWORD}`
+        )}`,
+      },
+    }
+  ) {
     super(options);
   }
 

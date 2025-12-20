@@ -1,23 +1,28 @@
-const path = require('path');
-const authAPI = require('./authAPI');
-const BaseAPI = require('../../main/utils/API/baseAPI');
-const JSONLoader = require('../../main/utils/data/JSONLoader');
-require('dotenv').config({ path: path.join(__dirname, '../../../', '.env.test'), override: true });
+const path = require("path");
+const authAPI = require("./authAPI");
+const { BaseAPI } = require("@amanat-qa/utils-backend");
+const JSONLoader = require("../../main/utils/data/JSONLoader");
+require("dotenv").config({
+  path: path.join(__dirname, "../../../", ".env.test"),
+  override: true,
+});
 
 class DictionaryAPI extends BaseAPI {
   #API;
 
   #options;
 
-  constructor(options = {
-    baseURL: '' || process.env.GATEWAY_URL,
-  }) {
+  constructor(
+    options = {
+      baseURL: "" || process.env.GATEWAY_URL,
+    }
+  ) {
     super(options);
     this.#options = options;
   }
 
   async setToken() {
-    const response = await authAPI.auth({ APIName: 'Dictionary API' });
+    const response = await authAPI.auth({ APIName: "Dictionary API" });
     this.#options.headers = {};
     this.#options.headers.Authorization = `Bearer ${response.data.data.access_token}`;
     this.#API = new DictionaryAPI(this.#options);
@@ -36,7 +41,10 @@ class DictionaryAPI extends BaseAPI {
       value: Number(JSONLoader.configData.verification),
     };
 
-    return this.#API.patch(JSONLoader.APIEndpoints.dictionary.verifyBool, params);
+    return this.#API.patch(
+      JSONLoader.APIEndpoints.dictionary.verifyBool,
+      params
+    );
   }
 
   async carMarks() {
@@ -45,7 +53,7 @@ class DictionaryAPI extends BaseAPI {
 
   async carModels() {
     const params = {
-      'where[title]': JSONLoader.templateSetPolicy.cars.mark,
+      "where[title]": JSONLoader.templateSetPolicy.cars.mark,
     };
 
     return this.#API.get(JSONLoader.APIEndpoints.dictionary.carModels, params);
@@ -65,7 +73,10 @@ class DictionaryAPI extends BaseAPI {
       start_date: nextMonthFirstDay,
     };
 
-    return this.#API.get(JSONLoader.APIEndpoints.dictionary.weekendGetWorkDay, params);
+    return this.#API.get(
+      JSONLoader.APIEndpoints.dictionary.weekendGetWorkDay,
+      params
+    );
   }
 
   async getESBDValue() {
