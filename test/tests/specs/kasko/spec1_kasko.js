@@ -11,9 +11,10 @@ const Logger = require("../../../main/utils/log/logger");
 const DataUtils = require("../../../main/utils/data/dataUtils");
 const JSONLoader = require("../../../main/utils/data/JSONLoader");
 const Randomizer = require("../../../main/utils/random/randomizer");
+const { DateFormats } = require("@amanat-qa/utils-backend");
 
 chai.should();
-const today = moment().format(JSONLoader.testData.datesFormatDMY);
+const today = moment().format(DateFormats.DMY);
 const setPolicyTWB = async (policyNumber) => {
   if (JSONLoader.configData.setPolicyWaitingTWB) {
     const response = await TWBAPI.startSetPolicyWaiting();

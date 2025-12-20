@@ -7,7 +7,7 @@ const authAPI = require("../tests/API/authAPI");
 const docsAPI = require("../tests/API/docsAPI");
 const onesAPI = require("../tests/API/onesAPI");
 const ESBDAPI = require("../tests/API/ESBDAPI");
-const KASKOAPI = require("../tests/API/KASKOAPI");
+const cascoAPI = require("../tests/API/CascoAPI");
 const dictionaryAPI = require("../tests/API/dictionaryAPI");
 const { Logger } = require("@amanat-qa/utils-backend");
 const JSONLoader = require("./utils/data/JSONLoader");
@@ -64,7 +64,7 @@ exports.mochaHooks = {
     await ESBDAPI.setToken();
     await dictionaryAPI.setToken();
     await docsAPI.setToken();
-    await KASKOAPI.setToken();
+    await cascoAPI.setToken();
     await dictionaryAPI.toggleVerification();
     await dictionaryAPI.toggleServer();
     const configData = JSON.parse(readFileSync(configDataFileLocation, "utf8"));

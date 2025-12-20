@@ -4,6 +4,7 @@ const {
   JSONMapper,
   TimeUtils,
   Randomizer,
+  DateFormats,
 } = require("@amanat-qa/utils-backend");
 const fs = require("fs");
 const moment = require("moment-business-days");
@@ -44,7 +45,7 @@ class DataUtilsExtended extends DataUtils {
       const nextMonthFirstDay = moment()
         .add(1, "M")
         .startOf("month")
-        .format(JSONLoader.testData.datesFormatDMY);
+        .format(DateFormats.DMY);
       const paymentDate = await dictionaryAPI.getWorkingDay(nextMonthFirstDay);
       flattenedRequestData[paymentStartDateFullKey] = paymentDate.data.data;
       requestDataCopy = JSONMapper.unflattenJSON(flattenedRequestData);
