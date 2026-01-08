@@ -1,12 +1,12 @@
-const path = require("path");
+const path = require('path');
 const {
   Logger,
   BaseAPI,
   Randomizer,
-  JSONLoader,
-} = require("@amanat-qa/utils-backend");
-require("dotenv").config({
-  path: path.join(__dirname, "../../../", ".env.test"),
+} = require('@amanat-qa/utils-backend');
+const JSONLoader = require('../../main/utils/data/JSONLoader');
+require('dotenv').config({
+  path: path.join(__dirname, '../../../', '.env.test'),
   override: true,
 });
 
@@ -21,13 +21,13 @@ class AuthAPI extends BaseAPI {
 
   constructor(
     options = {
-      baseURL: "" || process.env.GATEWAY_URL,
-    }
+      baseURL: '' || process.env.GATEWAY_URL,
+    },
   ) {
     super(options);
     this.#options = options;
-    this.#login = "" || process.env.AUTH_LOGIN;
-    this.#password = "" || process.env.AUTH_PASSWORD;
+    this.#login = '' || process.env.AUTH_LOGIN;
+    this.#password = '' || process.env.AUTH_PASSWORD;
   }
 
   async auth({ user, APIName }) {
@@ -40,8 +40,8 @@ class AuthAPI extends BaseAPI {
   }
 
   async setToken() {
-    const response = await this.auth({ APIName: "Auth API" });
-    this.#options.logString = "[inf] ▶ set base API URL:";
+    const response = await this.auth({ APIName: 'Auth API' });
+    this.#options.logString = '[inf] ▶ set base API URL:';
     this.#options.headers = {};
     this.#options.headers.Authorization = `Bearer ${response.data.data.access_token}`;
     this.#API = new AuthAPI(this.#options);
@@ -61,6 +61,14 @@ class AuthAPI extends BaseAPI {
     if (isOnline) users = users.filter((elem) => elem.online);
 
     return users[Randomizer.getRandomInteger(users.length - 1)];
+  }
+
+  async getUserByLogin(login) {
+    return this.#API.get(`${JSONLoader.APIEndpoints.auth.users}/login/${login}`);
+  }
+
+  async getUserById(id) {
+    return this.#API.get(`${JSONLoader.APIEndpoints.auth.users}/${id}`);
   }
 }
 

@@ -1,0 +1,758 @@
+{
+    "title": "set tariff for policy vehicle response schema",
+    "type": "object",
+    "properties": {
+        "success": {
+            "type": "boolean"
+        },
+        "message": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "id_esbd": {
+                    "type": "integer"
+                },
+                "vin": {
+                    "type": "string"
+                },
+                "body_number": {
+                    "type": "string"
+                },
+                "vehicle_type_id": {
+                    "type": "integer"
+                },
+                "model_id_esbd": {
+                    "type": "integer"
+                },
+                "mark_id_esbd": {
+                    "type": "integer"
+                },
+                "mark": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "born_year": {
+                    "type": "integer"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "engine_power": {
+                    "type": "integer"
+                },
+                "engine_number": {
+                    "type": "string"
+                },
+                "engine_volume": {
+                    "type": "number"
+                },
+                "category": {
+                    "type": "string"
+                },
+                "places_count": {
+                    "type": "integer"
+                },
+                "right_hand_drive_bool": {
+                    "type": "boolean"
+                },
+                "verified_bool": {
+                    "type": "boolean"
+                },
+                "region_id": {
+                    "type": "integer"
+                },
+                "country_id": {
+                    "type": "integer"
+                },
+                "is_registered": {
+                    "type": "boolean"
+                },
+                "registration_number": {
+                    "type": "string"
+                },
+                "registration_certificate_number": {
+                    "type": "string"
+                },
+                "registration_certificate_date": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "null"
+                },
+                "pivot": {
+                    "type": "object",
+                    "properties": {
+                        "policy_id": {
+                            "type": "integer"
+                        },
+                        "vehicle_id": {
+                            "type": "integer"
+                        },
+                        "tariff_id": {
+                            "type": "integer"
+                        },
+                        "is_new": {
+                            "type": "boolean"
+                        },
+                        "insurance_sum": {
+                            "type": "integer"
+                        },
+                        "market_value": {
+                            "type": "integer"
+                        },
+                        "underinsurance_sum": {
+                            "type": "integer"
+                        },
+                        "premium": {
+                            "type": "number"
+                        },
+                        "calculated_premium": {
+                            "type": "null"
+                        },
+                        "no_revision_reason_id": {
+                            "type": "null"
+                        },
+                        "currency": {
+                            "type": "string"
+                        },
+                        "exchange_rate": {
+                            "type": "null"
+                        },
+                        "created_at": {
+                            "type": "string"
+                        },
+                        "updated_at": {
+                            "type": "string"
+                        },
+                        "tariff": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer"
+                                },
+                                "program_id": {
+                                    "type": "integer"
+                                },
+                                "user_id": {
+                                    "type": ["integer", "null"]
+                                },
+                                "damage_franchise_id": {
+                                    "type": "integer"
+                                },
+                                "loss_franchise_id": {
+                                    "type": "integer"
+                                },
+                                "damage_franchise_group_id": {
+                                    "type": "integer"
+                                },
+                                "loss_franchise_group_id": {
+                                    "type": "integer"
+                                },
+                                "territory_id": {
+                                    "type": "integer"
+                                },
+                                "depreciation_type_id": {
+                                    "type": "integer"
+                                },
+                                "vehicle_age_id": {
+                                    "type": "integer"
+                                },
+                                "payment_condition_id": {
+                                    "type": "integer"
+                                },
+                                "product_id_1c": {
+                                    "type": "integer"
+                                },
+                                "vehicle_type_id": {
+                                    "type": "integer"
+                                },
+                                "program_vehicle_model_id": {
+                                    "type": ["integer", "null"]
+                                },
+                                "manufacture_country_id": {
+                                    "type": ["integer", "null"]
+                                },
+                                "agent_commission": {
+                                    "type": "number"
+                                },
+                                "real_agent_commission": {
+                                    "type": "number"
+                                },
+                                "for_juridical_person": {
+                                    "type": "boolean"
+                                },
+                                "value": {
+                                    "type": "number"
+                                },
+                                "calculated_value": {
+                                    "type": "number"
+                                },
+                                "created_at": {
+                                    "type": "string"
+                                },
+                                "updated_at": {
+                                    "type": "string"
+                                },
+                                "deleted_at": {
+                                    "type": "null"
+                                },
+                                "is_fci": {
+                                    "type": "integer"
+                                },
+                                "territory": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "program_id": {
+                                            "type": "integer"
+                                        },
+                                        "country_group_id": {
+                                            "type": ["integer", "null"]
+                                        },
+                                        "country_id": {
+                                            "type": ["integer", "null"]
+                                        },
+                                        "coefficient": {
+                                            "type": "number"
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        },
+                                        "deleted_at": {
+                                            "type": "null"
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "program_id",
+                                        "country_group_id",
+                                        "country_id",
+                                        "coefficient",
+                                        "created_at",
+                                        "updated_at",
+                                        "deleted_at"
+                                    ]
+                                },
+                                "damage_franchise": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "group_id": {
+                                            "type": "integer"
+                                        },
+                                        "linked_id": {
+                                            "type": ["integer", "null"]
+                                        },
+                                        "program_id": {
+                                            "type": "integer"
+                                        },
+                                        "franchise_id": {
+                                            "type": "integer"
+                                        },
+                                        "product_id_1c": {
+                                            "type": ["integer", "null"]
+                                        },
+                                        "payment_condition_id": {
+                                            "type": ["integer", "null"]
+                                        },
+                                        "coefficient": {
+                                            "type": "number"
+                                        },
+                                        "min_insurance_sum": {
+                                            "type": ["integer", "null"]
+                                        },
+                                        "max_insurance_sum": {
+                                            "type": ["integer", "null"]
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        },
+                                        "deleted_at": {
+                                            "type": "null"
+                                        },
+                                        "franchise": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "term_id": {
+                                                    "type": "integer"
+                                                },
+                                                "type_id": {
+                                                    "type": "integer"
+                                                },
+                                                "logical_type_id": {
+                                                    "type": "integer"
+                                                },
+                                                "value": {
+                                                    "type": "number"
+                                                },
+                                                "min_sum": {
+                                                    "type": ["integer", "null"]
+                                                },
+                                                "max_sum": {
+                                                    "type": ["integer", "null"]
+                                                },
+                                                "created_at": {
+                                                    "type": "string"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string"
+                                                },
+                                                "deleted_at": {
+                                                    "type": "null"
+                                                },
+                                                "type": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer"
+                                                        },
+                                                        "title": {
+                                                            "type": "string"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string"
+                                                        },
+                                                        "deleted_at": {
+                                                            "type": "null"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id",
+                                                        "title",
+                                                        "created_at",
+                                                        "updated_at",
+                                                        "deleted_at"
+                                                    ]
+                                                },
+                                                "term": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer"
+                                                        },
+                                                        "title": {
+                                                            "type": "string"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string"
+                                                        },
+                                                        "deleted_at": {
+                                                            "type": "null"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id",
+                                                        "title",
+                                                        "created_at",
+                                                        "updated_at",
+                                                        "deleted_at"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "term_id",
+                                                "type_id",
+                                                "logical_type_id",
+                                                "value",
+                                                "min_sum",
+                                                "max_sum",
+                                                "created_at",
+                                                "updated_at",
+                                                "deleted_at",
+                                                "type",
+                                                "term"
+                                            ]
+                                        },
+                                        "regions": {
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "group_id",
+                                        "linked_id",
+                                        "program_id",
+                                        "franchise_id",
+                                        "product_id_1c",
+                                        "payment_condition_id",
+                                        "coefficient",
+                                        "min_insurance_sum",
+                                        "max_insurance_sum",
+                                        "created_at",
+                                        "updated_at",
+                                        "deleted_at",
+                                        "franchise",
+                                        "regions"
+                                    ]
+                                },
+                                "loss_franchise": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "group_id": {
+                                            "type": "integer"
+                                        },
+                                        "linked_id": {
+                                            "type": ["integer", "null"]
+                                        },
+                                        "program_id": {
+                                            "type": "integer"
+                                        },
+                                        "franchise_id": {
+                                            "type": "integer"
+                                        },
+                                        "product_id_1c": {
+                                            "type": ["integer", "null"]
+                                        },
+                                        "payment_condition_id": {
+                                            "type": ["integer", "null"]
+                                        },
+                                        "coefficient": {
+                                            "type": "number"
+                                        },
+                                        "min_insurance_sum": {
+                                            "type": ["integer", "null"]
+                                        },
+                                        "max_insurance_sum": {
+                                            "type": ["integer", "null"]
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        },
+                                        "deleted_at": {
+                                            "type": "null"
+                                        },
+                                        "franchise": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "term_id": {
+                                                    "type": "integer"
+                                                },
+                                                "type_id": {
+                                                    "type": "integer"
+                                                },
+                                                "logical_type_id": {
+                                                    "type": "integer"
+                                                },
+                                                "value": {
+                                                    "type": "number"
+                                                },
+                                                "min_sum": {
+                                                    "type": ["integer", "null"]
+                                                },
+                                                "max_sum": {
+                                                    "type": ["integer", "null"]
+                                                },
+                                                "created_at": {
+                                                    "type": "string"
+                                                },
+                                                "updated_at": {
+                                                    "type": "string"
+                                                },
+                                                "deleted_at": {
+                                                    "type": "null"
+                                                },
+                                                "type": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer"
+                                                        },
+                                                        "title": {
+                                                            "type": "string"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string"
+                                                        },
+                                                        "deleted_at": {
+                                                            "type": "null"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id",
+                                                        "title",
+                                                        "created_at",
+                                                        "updated_at",
+                                                        "deleted_at"
+                                                    ]
+                                                },
+                                                "term": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer"
+                                                        },
+                                                        "title": {
+                                                            "type": "string"
+                                                        },
+                                                        "created_at": {
+                                                            "type": "string"
+                                                        },
+                                                        "updated_at": {
+                                                            "type": "string"
+                                                        },
+                                                        "deleted_at": {
+                                                            "type": "null"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "id",
+                                                        "title",
+                                                        "created_at",
+                                                        "updated_at",
+                                                        "deleted_at"
+                                                    ]
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "term_id",
+                                                "type_id",
+                                                "logical_type_id",
+                                                "value",
+                                                "min_sum",
+                                                "max_sum",
+                                                "created_at",
+                                                "updated_at",
+                                                "deleted_at",
+                                                "type",
+                                                "term"
+                                            ]
+                                        },
+                                        "regions": {
+                                            "type": "array",
+                                            "items": {}
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "group_id",
+                                        "linked_id",
+                                        "program_id",
+                                        "franchise_id",
+                                        "product_id_1c",
+                                        "payment_condition_id",
+                                        "coefficient",
+                                        "min_insurance_sum",
+                                        "max_insurance_sum",
+                                        "created_at",
+                                        "updated_at",
+                                        "deleted_at",
+                                        "franchise",
+                                        "regions"
+                                    ]
+                                },
+                                "program": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer"
+                                        },
+                                        "number": {
+                                            "type": "string"
+                                        },
+                                        "title": {
+                                            "type": "string"
+                                        },
+                                        "alias": {
+                                            "type": "string"
+                                        },
+                                        "basic_tariff": {
+                                            "type": "number"
+                                        },
+                                        "revision_type_id": {
+                                            "type": "integer"
+                                        },
+                                        "sales_channel_id_1c": {
+                                            "type": ["integer", "null"]
+                                        },
+                                        "status_id": {
+                                            "type": "integer"
+                                        },
+                                        "start_date": {
+                                            "type": "string"
+                                        },
+                                        "end_date": {
+                                            "type": "string"
+                                        },
+                                        "approval_date": {
+                                            "type": ["string", "null"]
+                                        },
+                                        "created_at": {
+                                            "type": "string"
+                                        },
+                                        "updated_at": {
+                                            "type": "string"
+                                        },
+                                        "deleted_at": {
+                                            "type": "null"
+                                        },
+                                        "revision_type": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer"
+                                                },
+                                                "title": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "id",
+                                                "title"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "id",
+                                        "number",
+                                        "title",
+                                        "alias",
+                                        "basic_tariff",
+                                        "revision_type_id",
+                                        "sales_channel_id_1c",
+                                        "status_id",
+                                        "start_date",
+                                        "end_date",
+                                        "approval_date",
+                                        "created_at",
+                                        "updated_at",
+                                        "deleted_at",
+                                        "revision_type"
+                                    ]
+                                }
+                            },
+                            "required": [
+                                "id",
+                                "program_id",
+                                "user_id",
+                                "damage_franchise_id",
+                                "loss_franchise_id",
+                                "damage_franchise_group_id",
+                                "loss_franchise_group_id",
+                                "territory_id",
+                                "depreciation_type_id",
+                                "vehicle_age_id",
+                                "payment_condition_id",
+                                "product_id_1c",
+                                "vehicle_type_id",
+                                "program_vehicle_model_id",
+                                "manufacture_country_id",
+                                "agent_commission",
+                                "real_agent_commission",
+                                "for_juridical_person",
+                                "value",
+                                "calculated_value",
+                                "created_at",
+                                "updated_at",
+                                "deleted_at",
+                                "is_fci",
+                                "territory",
+                                "damage_franchise",
+                                "loss_franchise",
+                                "program"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "policy_id",
+                        "vehicle_id",
+                        "tariff_id",
+                        "is_new",
+                        "insurance_sum",
+                        "market_value",
+                        "underinsurance_sum",
+                        "premium",
+                        "calculated_premium",
+                        "no_revision_reason_id",
+                        "currency",
+                        "exchange_rate",
+                        "created_at",
+                        "updated_at",
+                        "tariff"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "id_esbd",
+                "vin",
+                "body_number",
+                "vehicle_type_id",
+                "model_id_esbd",
+                "mark_id_esbd",
+                "mark",
+                "model",
+                "born_year",
+                "color",
+                "engine_power",
+                "engine_number",
+                "engine_volume",
+                "category",
+                "places_count",
+                "right_hand_drive_bool",
+                "verified_bool",
+                "region_id",
+                "country_id",
+                "is_registered",
+                "registration_number",
+                "registration_certificate_number",
+                "registration_certificate_date",
+                "created_at",
+                "updated_at",
+                "deleted_at",
+                "pivot"
+            ]
+        }
+    },
+    "required": [
+        "success",
+        "message",
+        "data"
+    ]
+}

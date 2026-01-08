@@ -1,9 +1,9 @@
-const path = require("path");
-const authAPI = require("./authAPI");
-const { BaseAPI } = require("@amanat-qa/utils-backend");
-const JSONLoader = require("../../main/utils/data/JSONLoader");
-require("dotenv").config({
-  path: path.join(__dirname, "../../../", ".env.test"),
+const path = require('path');
+const { BaseAPI } = require('@amanat-qa/utils-backend');
+const authAPI = require('./authAPI');
+const JSONLoader = require('../../main/utils/data/JSONLoader');
+require('dotenv').config({
+  path: path.join(__dirname, '../../../', '.env.test'),
   override: true,
 });
 
@@ -14,15 +14,15 @@ class DictionaryAPI extends BaseAPI {
 
   constructor(
     options = {
-      baseURL: "" || process.env.GATEWAY_URL,
-    }
+      baseURL: '' || process.env.GATEWAY_URL,
+    },
   ) {
     super(options);
     this.#options = options;
   }
 
   async setToken() {
-    const response = await authAPI.auth({ APIName: "Dictionary API" });
+    const response = await authAPI.auth({ APIName: 'Dictionary API' });
     this.#options.headers = {};
     this.#options.headers.Authorization = `Bearer ${response.data.data.access_token}`;
     this.#API = new DictionaryAPI(this.#options);
@@ -43,7 +43,7 @@ class DictionaryAPI extends BaseAPI {
 
     return this.#API.patch(
       JSONLoader.APIEndpoints.dictionary.verifyBool,
-      params
+      params,
     );
   }
 
@@ -53,7 +53,7 @@ class DictionaryAPI extends BaseAPI {
 
   async carModels() {
     const params = {
-      "where[title]": JSONLoader.templateSetPolicy.cars.mark,
+      'where[title]': JSONLoader.templateSetPolicy.cars.mark,
     };
 
     return this.#API.get(JSONLoader.APIEndpoints.dictionary.carModels, params);
@@ -75,7 +75,7 @@ class DictionaryAPI extends BaseAPI {
 
     return this.#API.get(
       JSONLoader.APIEndpoints.dictionary.weekendGetWorkDay,
-      params
+      params,
     );
   }
 

@@ -1,7 +1,8 @@
 {
   "auth": {
     "login": "api/login",
-    "testUsers": "api/auth/test-users"
+    "testUsers": "api/auth/test-users",
+    "users": "api/auth/users"
   },
   "dictionary": {
     "verifyBool": "api/dictionary/settings/verify_bool",
@@ -11,7 +12,14 @@
     "testCars": "api/dictionary/test-cars",
     "testClients": "api/dictionary/test-clients",
     "weekendGetWorkDay": "api/dictionary/weekend/get-work-day",
-    "ESBD": "api/dictionary/settings/key/esbd"
+    "ESBD": "api/dictionary/settings/key/esbd",
+    "vehicle-types": "api/dictionary/vehicle-types",
+    "regions": "api/dictionary/regions",
+    "countries": "api/dictionary/countries",
+    "cities": "api/dictionary/cities",
+    "document-types": "api/dictionary/document-types",
+    "activity-kinds": "api/dictionary/activity-kinds",
+    "economics-sectors": "api/dictionary/economics-sectors"
   },
   "ones": {
     "callMethod": "api/ones/v2/ones/call-method"
@@ -34,7 +42,14 @@
     "cancelPolicy": "api/kasko/cancel-policy",
     "uploadFile": "api/kasko/upload-file"
   },
-  "CASCO": {},
+  "casco": {
+    "settings": "api/casco/settings",
+    "cities": "api/casco/cities",
+    "policies": "api/casco/policies",
+    "tariffs": "api/casco/tariffs",
+    "insurance-periods": "api/casco/insurance-periods",
+    "payment-plans": "api/casco/payment-plans"
+  },
   "docs": {
     "getFile": "api/docs/get-file"
   }

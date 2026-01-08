@@ -1,0 +1,192 @@
+{
+    "title": "create vehicle response schema",
+    "type": "object",
+    "properties": {
+        "success": {
+            "type": "boolean"
+        },
+        "message": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "id_esbd": {
+                    "type": "integer"
+                },
+                "vin": {
+                    "type": "string"
+                },
+                "body_number": {
+                    "type": ["string", "null"]
+                },
+                "vehicle_type_id": {
+                    "type": "integer"
+                },
+                "model_id_esbd": {
+                    "type": "integer"
+                },
+                "mark_id_esbd": {
+                    "type": "integer"
+                },
+                "mark": {
+                    "type": "string"
+                },
+                "model": {
+                    "type": "string"
+                },
+                "born_year": {
+                    "type": "integer"
+                },
+                "color": {
+                    "type": ["string", "null"]
+                },
+                "engine_power": {
+                    "type": "integer"
+                },
+                "engine_number": {
+                    "type": ["string", "null"]
+                },
+                "engine_volume": {
+                    "type": "number"
+                },
+                "category": {
+                    "type": ["string", "null"]
+                },
+                "places_count": {
+                    "type": "integer"
+                },
+                "right_hand_drive_bool": {
+                    "type": "boolean"
+                },
+                "verified_bool": {
+                    "type": "boolean"
+                },
+                "region_id": {
+                    "type": "integer"
+                },
+                "country_id": {
+                    "type": "integer"
+                },
+                "is_registered": {
+                    "type": "boolean"
+                },
+                "registration_number": {
+                    "type": ["string", "null"]
+                },
+                "registration_certificate_number": {
+                    "type": ["string", "null"]
+                },
+                "registration_certificate_date": {
+                    "type": ["string", "null"]
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "deleted_at": {
+                    "type": "null"
+                },
+                "pivot": {
+                    "type": "object",
+                    "properties": {
+                        "policy_id": {
+                            "type": "integer"
+                        },
+                        "vehicle_id": {
+                            "type": "integer"
+                        },
+                        "tariff_id": {
+                            "type": "null"
+                        },
+                        "premium": {
+                            "type": "null"
+                        },
+                        "calculated_premium": {
+                            "type": "null"
+                        },
+                        "insurance_sum": {
+                            "type": "integer"
+                        },
+                        "market_value": {
+                            "type": "null"
+                        },
+                        "currency": {
+                            "type": "string"
+                        },
+                        "no_revision_reason_id": {
+                            "type": "null"
+                        },
+                        "is_new": {
+                            "type": "boolean"
+                        },
+                        "created_at": {
+                            "type": "string"
+                        },
+                        "updated_at": {
+                            "type": "string"
+                        },
+                        "tariff": {
+                            "type": "null"
+                        }
+                    },
+                    "required": [
+                        "policy_id",
+                        "vehicle_id",
+                        "tariff_id",
+                        "premium",
+                        "calculated_premium",
+                        "insurance_sum",
+                        "market_value",
+                        "currency",
+                        "no_revision_reason_id",
+                        "is_new",
+                        "created_at",
+                        "updated_at",
+                        "tariff"
+                    ]
+                }
+            },
+            "required": [
+                "id",
+                "id_esbd",
+                "vin",
+                "body_number",
+                "vehicle_type_id",
+                "model_id_esbd",
+                "mark_id_esbd",
+                "mark",
+                "model",
+                "born_year",
+                "color",
+                "engine_power",
+                "engine_number",
+                "engine_volume",
+                "category",
+                "places_count",
+                "right_hand_drive_bool",
+                "verified_bool",
+                "region_id",
+                "country_id",
+                "is_registered",
+                "registration_number",
+                "registration_certificate_number",
+                "registration_certificate_date",
+                "created_at",
+                "updated_at",
+                "deleted_at",
+                "pivot"
+            ]
+        }
+    },
+    "required": [
+        "success",
+        "message",
+        "data"
+    ]
+}

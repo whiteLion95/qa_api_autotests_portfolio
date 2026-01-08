@@ -1,0 +1,118 @@
+{
+  "title": "create policy response schema",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean"
+    },
+    "message": {
+      "type": "string"
+    },
+    "data": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer"
+        },
+        "esbd_id": {
+          "type": "null"
+        },
+        "global_id": {
+          "type": "null"
+        },
+        "external_id": {
+          "type": "null"
+        },
+        "program_id": {
+          "type": "null"
+        },
+        "depreciation_type_id": {
+          "type": "null"
+        },
+        "insurance_period_id": {
+          "type": "null"
+        },
+        "payment_condition_id": {
+          "type": "null"
+        },
+        "status_id": {
+          "type": "integer"
+        },
+        "product_id_1c": {
+          "type": "null"
+        },
+        "number": {
+          "type": "null"
+        },
+        "premium": {
+          "type": "null"
+        },
+        "insurance_sum": {
+          "type": "null"
+        },
+        "start_date": {
+          "type": "null"
+        },
+        "end_date": {
+          "type": "null"
+        },
+        "user_id": {
+          "type": "integer"
+        },
+        "manager_id": {
+          "type": "integer"
+        },
+        "agent_id": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "subagent_id": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "created_at": {
+          "type": "string"
+        },
+        "updated_at": {
+          "type": "string"
+        },
+        "deleted_at": {
+          "type": "null"
+        }
+      },
+      "required": [
+        "id",
+        "esbd_id",
+        "global_id",
+        "external_id",
+        "program_id",
+        "depreciation_type_id",
+        "insurance_period_id",
+        "payment_condition_id",
+        "status_id",
+        "product_id_1c",
+        "number",
+        "premium",
+        "insurance_sum",
+        "start_date",
+        "end_date",
+        "user_id",
+        "manager_id",
+        "agent_id",
+        "subagent_id",
+        "created_at",
+        "updated_at",
+        "deleted_at"
+      ]
+    }
+  },
+  "required": [
+    "success",
+    "message",
+    "data"
+  ]
+}

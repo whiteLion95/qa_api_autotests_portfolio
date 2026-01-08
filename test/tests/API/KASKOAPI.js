@@ -1,17 +1,17 @@
 let userIDOnes;
-const path = require("path");
-const fs = require("fs");
-const authAPI = require("./authAPI");
+const path = require('path');
+const fs = require('fs');
 const {
   BaseAPI,
   TimeUtils,
   JSONMapper,
   Randomizer,
-} = require("@amanat-qa/utils-backend");
-const DataUtils = require("../../main/utils/data/dataUtilsExtended");
-const JSONLoader = require("../../main/utils/data/JSONLoader");
-require("dotenv").config({
-  path: path.join(__dirname, "../../../", ".env.test"),
+} = require('@amanat-qa/utils-backend');
+const authAPI = require('./authAPI');
+const DataUtils = require('../../main/utils/data/dataUtilsExtended');
+const JSONLoader = require('../../main/utils/data/JSONLoader');
+require('dotenv').config({
+  path: path.join(__dirname, '../../../', '.env.test'),
   override: true,
 });
 
@@ -24,8 +24,8 @@ class KASKOAPI extends BaseAPI {
 
   constructor(
     options = {
-      baseURL: "" || process.env.GATEWAY_URL,
-    }
+      baseURL: '' || process.env.GATEWAY_URL,
+    },
   ) {
     super(options);
     this.#options = options;
@@ -39,7 +39,7 @@ class KASKOAPI extends BaseAPI {
     this.#user = await authAPI.getTestUser();
     const response = await authAPI.auth({
       user: this.#user,
-      APIName: "KASKO API",
+      APIName: 'KASKO API',
     });
     userIDOnes = response.data.data.user.id_1c;
     this.#options.headers = {};
@@ -52,7 +52,7 @@ class KASKOAPI extends BaseAPI {
 
     return this.#API.get(
       JSONLoader.APIEndpoints.KASKO.getCarAveragePrice,
-      params
+      params,
     );
   }
 
@@ -76,22 +76,21 @@ class KASKOAPI extends BaseAPI {
   }
 
   async setPolicy(setPolicyTemplate) {
-    const flattenedSetPolicyTemplate =
-      JSONMapper.flattenJSON(setPolicyTemplate);
+    const flattenedSetPolicyTemplate = JSONMapper.flattenJSON(setPolicyTemplate);
 
     const premium = Randomizer.getRandomInteger(
-      JSONLoader.testData.maxPremiumAmount
+      JSONLoader.testData.maxPremiumAmount,
     );
     const premiumFullKeys = JSONMapper.getNestedProperty(
       flattenedSetPolicyTemplate,
-      "premium"
+      'premium',
     ).keys;
     premiumFullKeys.forEach((fullKey) => {
       flattenedSetPolicyTemplate[fullKey] = premium;
     });
     const externalIDFullKey = JSONMapper.getNestedProperty(
       flattenedSetPolicyTemplate,
-      "external_id"
+      'external_id',
     ).keys.pop();
     flattenedSetPolicyTemplate[externalIDFullKey] = Randomizer.getRandomString(
       true,
@@ -100,21 +99,21 @@ class KASKOAPI extends BaseAPI {
       false,
       false,
       8,
-      10
+      10,
     );
     const agentIDOnesFullKey = JSONMapper.getNestedProperty(
       flattenedSetPolicyTemplate,
-      "agent_id_1c"
+      'agent_id_1c',
     ).keys.pop();
     flattenedSetPolicyTemplate[agentIDOnesFullKey] = !this.#user.login.includes(
-      "tugelbassov"
+      'tugelbassov',
     )
       ? userIDOnes
       : 0;
 
     // insurance period randomization. 1 to 12 months.
     const insurancePeriod = Randomizer.getRandomInteger(12, 1);
-    const datesInterval = TimeUtils.getDatesInterval(insurancePeriod, "month");
+    const datesInterval = TimeUtils.getDatesInterval(insurancePeriod, 'month');
 
     // payment type randomization (0 - onetime, 1 - installment).
     // default values are for one-time payment.
@@ -127,68 +126,67 @@ class KASKOAPI extends BaseAPI {
       paymentCount = Randomizer.getRandomInteger(12, 2);
       paymentStartDate = datesInterval.startDate;
       paymentTransitionSum = Math.floor(paymentTransitionSum / paymentCount);
-      paymentTransitionSum =
-        premium - (paymentCount - 1) * paymentTransitionSum;
+      paymentTransitionSum = premium - (paymentCount - 1) * paymentTransitionSum;
     }
 
     const paymentTypeFullKey = JSONMapper.getNestedProperty(
       flattenedSetPolicyTemplate,
-      "payment_type"
+      'payment_type',
     ).keys.pop();
     flattenedSetPolicyTemplate[paymentTypeFullKey] = paymentType;
     const paymentCountFullKey = JSONMapper.getNestedProperty(
       flattenedSetPolicyTemplate,
-      "payment_count"
+      'payment_count',
     ).keys.pop();
     flattenedSetPolicyTemplate[paymentCountFullKey] = paymentCount;
     const transitionSumFullKey = JSONMapper.getNestedProperty(
       flattenedSetPolicyTemplate,
-      "transitionSum"
+      'transitionSum',
     ).keys.pop();
     flattenedSetPolicyTemplate[transitionSumFullKey] = paymentTransitionSum;
     const paymentStartDateFullKey = JSONMapper.getNestedProperty(
       flattenedSetPolicyTemplate,
-      "payment_start_date"
+      'payment_start_date',
     ).keys.pop();
     flattenedSetPolicyTemplate[paymentStartDateFullKey] = paymentStartDate;
     const insurancePeriodFullKeys = JSONMapper.getNestedProperty(
       flattenedSetPolicyTemplate,
-      "insurance_period"
+      'insurance_period',
     ).keys;
     insurancePeriodFullKeys.forEach((fullKey) => {
       flattenedSetPolicyTemplate[fullKey] = insurancePeriod;
     });
     const startDateFullKey = JSONMapper.getNestedProperty(
       flattenedSetPolicyTemplate,
-      "start_date"
+      'start_date',
     ).keys.pop();
     flattenedSetPolicyTemplate[startDateFullKey] = datesInterval.startDate;
     const endDateFullKey = JSONMapper.getNestedProperty(
       flattenedSetPolicyTemplate,
-      "end_date"
+      'end_date',
     ).keys.pop();
     flattenedSetPolicyTemplate[endDateFullKey] = datesInterval.finishDate;
     const priceTypeFullKey = JSONMapper.getNestedProperty(
       flattenedSetPolicyTemplate,
-      "price_type"
+      'price_type',
     ).keys.pop();
     flattenedSetPolicyTemplate[priceTypeFullKey] = Randomizer.getRandomInteger(
       2,
-      1
+      1,
     );
 
     const params = JSONMapper.unflattenJSON(flattenedSetPolicyTemplate);
 
     let { testClients } = JSONLoader;
     testClients = DataUtils.filterClients(testClients, { isJuridical: false });
-    const { beneficiary, insured } =
-      DataUtils.createRandomBeneficiaryAndInsuredStructures(testClients);
+    const { beneficiary, insured } = DataUtils
+      .createRandomBeneficiaryAndInsuredStructures(testClients);
     params.client = insured;
     params.beneficiary = beneficiary;
 
     const response = await this.#API.post(
       JSONLoader.APIEndpoints.KASKO.setPolicy,
-      params
+      params,
     );
 
     return { requestBody: params, response };
@@ -196,8 +194,8 @@ class KASKOAPI extends BaseAPI {
 
   async policies() {
     const params = {
-      "order[id]": "desc",
-      "pagination[pageSize]": 15,
+      'order[id]': 'desc',
+      'pagination[pageSize]': 15,
       page: 1,
     };
 
@@ -217,18 +215,18 @@ class KASKOAPI extends BaseAPI {
   async uploadFile(policyID, fileName) {
     const filePath = path.join(
       __dirname,
-      JSONLoader.testData.filePathForUploadMethod
+      JSONLoader.testData.filePathForUploadMethod,
     );
-    const fileObject = fs.readFileSync(filePath, "utf8");
+    const fileObject = fs.readFileSync(filePath, 'utf8');
     const params = new FormData();
-    params.append("content_type", "multipart/form-data");
+    params.append('content_type', 'multipart/form-data');
     params.append(
-      "file",
-      new Blob([fileObject], { type: "application/pdf" }),
-      `${fileName}.pdf`
+      'file',
+      new Blob([fileObject], { type: 'application/pdf' }),
+      `${fileName}.pdf`,
     );
-    params.append("policy_id", policyID);
-    params.append("file_name", fileName);
+    params.append('policy_id', policyID);
+    params.append('file_name', fileName);
 
     return this.#API.post(JSONLoader.APIEndpoints.KASKO.uploadFile, params);
   }

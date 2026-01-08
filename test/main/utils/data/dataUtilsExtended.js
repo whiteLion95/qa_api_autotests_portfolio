@@ -1,14 +1,13 @@
 const {
   DataUtils,
-  JSONLoader,
   JSONMapper,
   TimeUtils,
   Randomizer,
   DateFormats,
-} = require("@amanat-qa/utils-backend");
-const fs = require("fs");
-const moment = require("moment-business-days");
-const dictionaryAPI = require("../../../tests/API/dictionaryAPI");
+} = require('@amanat-qa/utils-backend');
+const moment = require('moment-business-days');
+const dictionaryAPI = require('../../../tests/API/dictionaryAPI');
+const JSONLoader = require('./JSONLoader');
 
 class DataUtilsExtended extends DataUtils {
   static passBugsTWB(mappedData, getPolicyData) {
@@ -16,11 +15,10 @@ class DataUtilsExtended extends DataUtils {
 
     // Pass TWB bug with "verify_bool" value without verification
     if (
-      getPolicyData.contracts[0].verify_bool === 1 &&
-      outputData["contracts.0.verify_bool"] === 0
+      getPolicyData.contracts[0].verify_bool === 1
+      && outputData['contracts.0.verify_bool'] === 0
     ) {
-      outputData["contracts.0.verify_bool"] =
-        getPolicyData.contracts[0].verify_bool;
+      outputData['contracts.0.verify_bool'] = getPolicyData.contracts[0].verify_bool;
     }
 
     return outputData;
@@ -38,13 +36,13 @@ class DataUtilsExtended extends DataUtils {
     if (
       JSONMapper.getNestedProperty(
         flattenedRequestData,
-        "payment_type"
+        'payment_type',
       ).values.pop() === 0
     ) {
-      const paymentStartDateFullKey = "policyData.payments.payment_start_date";
+      const paymentStartDateFullKey = 'policyData.payments.payment_start_date';
       const nextMonthFirstDay = moment()
-        .add(1, "M")
-        .startOf("month")
+        .add(1, 'M')
+        .startOf('month')
         .format(DateFormats.DMY);
       const paymentDate = await dictionaryAPI.getWorkingDay(nextMonthFirstDay);
       flattenedRequestData[paymentStartDateFullKey] = paymentDate.data.data;
@@ -54,39 +52,39 @@ class DataUtilsExtended extends DataUtils {
     let mappedData = JSONMapper.mapValues(
       { getPolicyData },
       { requestDataCopy },
-      optionalSchema ?? JSONLoader.requestToGetPolicyMapSchema
+      optionalSchema ?? JSONLoader.requestToGetPolicyMapSchema,
     );
 
     const datesFullKeys = JSONMapper.getNestedProperty(
       mappedData,
-      "date_begin"
+      'date_begin',
     ).keys;
     datesFullKeys.push(
-      ...JSONMapper.getNestedProperty(mappedData, "date_end").keys
+      ...JSONMapper.getNestedProperty(mappedData, 'date_end').keys,
     );
     datesFullKeys.push(
-      ...JSONMapper.getNestedProperty(mappedData, "date").keys
+      ...JSONMapper.getNestedProperty(mappedData, 'date').keys,
     );
     datesFullKeys.forEach((fullKey) => {
       mappedData[fullKey] = TimeUtils.reformatDateFromYMDToDMY(
-        mappedData[fullKey]
+        mappedData[fullKey],
       );
     });
 
     const percentFullKeys = JSONMapper.getNestedProperty(
       mappedData,
-      "franchise_percent"
+      'franchise_percent',
     ).keys;
     percentFullKeys.push(
-      ...JSONMapper.getNestedProperty(mappedData, "franchise_damage_percent")
-        .keys
+      ...JSONMapper.getNestedProperty(mappedData, 'franchise_damage_percent')
+        .keys,
     );
     percentFullKeys.push(
-      ...JSONMapper.getNestedProperty(mappedData, "franchise_loss_percent").keys
+      ...JSONMapper.getNestedProperty(mappedData, 'franchise_loss_percent').keys,
     );
     percentFullKeys.forEach((fullKey) => {
       mappedData[fullKey] = Number(
-        mappedData[fullKey].substr(0, mappedData[fullKey].indexOf("%"))
+        mappedData[fullKey].substr(0, mappedData[fullKey].indexOf('%')),
       );
     });
 
@@ -94,7 +92,7 @@ class DataUtilsExtended extends DataUtils {
     const rewritedData = JSONMapper.rewriteValues(
       mappedData,
       global.withESBD ? JSONLoader.dictOnes : JSONLoader.dictOnesWithoutESBD,
-      JSONLoader.dictRequest
+      JSONLoader.dictRequest,
     );
 
     const requestToOnesMappedData = JSONMapper.unflattenJSON(rewritedData);
@@ -106,19 +104,19 @@ class DataUtilsExtended extends DataUtils {
     this.saveToJSON({ getPolicyData });
     const paymentType = JSONMapper.getNestedProperty(
       JSONMapper.flattenJSON(getPolicyData),
-      "payment_form"
+      'payment_form',
     ).values.pop();
     let mappedData = JSONMapper.mapValues(
       { getPolicyData },
       { getContractByNumberData },
       paymentType
         ? JSONLoader.getContractByNumberToGetPolicyMapSchemaInstallmentPayment
-        : JSONLoader.getContractByNumberToGetPolicyMapSchemaOneTimePayment
+        : JSONLoader.getContractByNumberToGetPolicyMapSchemaOneTimePayment,
     );
 
     const paymentFullKeys = JSONMapper.getNestedProperty(
       mappedData,
-      "payment"
+      'payment',
     ).keys;
     paymentFullKeys.forEach((fullKey) => {
       mappedData[fullKey] = Number(mappedData[fullKey]);
@@ -128,7 +126,7 @@ class DataUtilsExtended extends DataUtils {
     const rewritedData = JSONMapper.rewriteValues(
       mappedData,
       JSONLoader.dictOnes,
-      JSONLoader.dictESBD
+      JSONLoader.dictESBD,
     );
 
     const ESBDToOnesMappedData = JSONMapper.unflattenJSON(rewritedData);
@@ -139,7 +137,7 @@ class DataUtilsExtended extends DataUtils {
 
   static createRandomBeneficiaryAndInsuredStructures(clientsArr) {
     const randomBeneficiaryIndex = Randomizer.getRandomInteger(
-      clientsArr.length - 1
+      clientsArr.length - 1,
     );
     let randomInsuredIndex;
     do {
@@ -164,13 +162,12 @@ class DataUtilsExtended extends DataUtils {
 
     resultInsured.born = TimeUtils.reformatDateFromYMDToDMY(tempInsured.born);
     resultInsured.document_gived_date = TimeUtils.reformatDateFromYMDToDMY(
-      tempInsured.document_gived_date
+      tempInsured.document_gived_date,
     );
 
     resultInsured.pdl = Randomizer.getRandomInteger(1);
     resultInsured.verify_bool = Number(JSONLoader.configData.verification);
-    resultInsured.verify_type_id =
-      Number(JSONLoader.configData.verification) || 3;
+    resultInsured.verify_type_id = Number(JSONLoader.configData.verification) || 3;
 
     resultInsured.address = JSONLoader.testData.address;
     resultInsured.email = JSONLoader.testData.email;
@@ -193,40 +190,35 @@ class DataUtilsExtended extends DataUtils {
     this.saveToJSON({ tariff });
     const setPolicyTemplate = JSONLoader.templateSetPolicy;
     const flattenedTariff = JSONMapper.flattenJSON(tariff);
-    const flattenedSetPolicyTemplate =
-      JSONMapper.flattenJSON(setPolicyTemplate);
-    const trimmedTariffKeys = Object.keys(flattenedTariff).map((key) =>
-      key.split(".").pop()
-    );
+    const flattenedSetPolicyTemplate = JSONMapper.flattenJSON(setPolicyTemplate);
+    const trimmedTariffKeys = Object.keys(flattenedTariff).map((key) => key.split('.').pop());
     const trimmedSetPolicyTemplateKeys = Object.keys(
-      flattenedSetPolicyTemplate
-    ).map((key) => key.split(".").pop());
+      flattenedSetPolicyTemplate,
+    ).map((key) => key.split('.').pop());
     const matchingKeys = new Set(
-      trimmedTariffKeys.filter((key) =>
-        new Set(trimmedSetPolicyTemplateKeys).has(key)
-      )
+      trimmedTariffKeys.filter((key) => new Set(trimmedSetPolicyTemplateKeys).has(key)),
     );
     const mappingSchema = Array.from(matchingKeys).reduce(
       (obj, element) => ({ ...obj, [element]: element }),
-      {}
+      {},
     );
     const flattenedUpdatedSetPolicyTemplate = JSONMapper.mapValues(
       { setPolicyTemplate },
       { tariff },
       mappingSchema,
-      { deleteNotMapped: false }
+      { deleteNotMapped: false },
     );
     const IDFromOptions = JSONMapper.getNestedProperty(
       flattenedUpdatedSetPolicyTemplate,
-      "id"
+      'id',
     ).values[0];
     const tarifIDOnesFullKey = JSONMapper.getNestedProperty(
       flattenedUpdatedSetPolicyTemplate,
-      "tarif_id_1c"
+      'tarif_id_1c',
     ).keys.pop();
     flattenedUpdatedSetPolicyTemplate[tarifIDOnesFullKey] = IDFromOptions;
     const updatedSetPolicyTemplate = JSONMapper.unflattenJSON(
-      flattenedUpdatedSetPolicyTemplate
+      flattenedUpdatedSetPolicyTemplate,
     );
     this.saveToJSON({ updatedSetPolicyTemplate });
 

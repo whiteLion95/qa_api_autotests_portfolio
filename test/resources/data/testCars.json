@@ -1,1 +1,29 @@
-{}
+{
+    "passenger": {
+        "id_esbd": 12714890,
+        "vin": "MXHK341CBMK312891",
+        "vehicle_type_id": 4,
+        "mark": "HYUNDAI",
+        "model": "ACCENT",
+        "born_year": 2021,
+        "is_registered": 1,
+        "is_china": 0,
+        "is_new": 1,
+        "region_id": 15,
+        "registration_number": "007KIS02",
+        "registration_certificate_number": "AJ99284795",
+        "registration_certificate_date": "05.04.2025",
+        "body_number": "Z94K341CBMR312891",
+        "model_id_esbd": 1234719,
+        "mark_id_esbd": 318301,
+        "color": "БЕЛЫЙ",
+        "engine_power": 90,
+        "engine_volume": 1591,
+        "chassis_number": "-",
+        "category": "B",
+        "country_id": 1,
+        "market_value": 7812086,
+        "insurance_sum": 7812086
+    },
+    "special": {}
+}

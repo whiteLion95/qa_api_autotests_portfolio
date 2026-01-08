@@ -1,9 +1,9 @@
-const path = require("path");
-const authAPI = require("./authAPI");
-const { BaseAPI } = require("@amanat-qa/utils-backend");
-const JSONLoader = require("../../main/utils/data/JSONLoader");
-require("dotenv").config({
-  path: path.join(__dirname, "../../../", ".env.test"),
+const path = require('path');
+const { BaseAPI } = require('@amanat-qa/utils-backend');
+const authAPI = require('./authAPI');
+const JSONLoader = require('../../main/utils/data/JSONLoader');
+require('dotenv').config({
+  path: path.join(__dirname, '../../../', '.env.test'),
   override: true,
 });
 
@@ -14,15 +14,15 @@ class DocsAPI extends BaseAPI {
 
   constructor(
     options = {
-      baseURL: "" || process.env.GATEWAY_URL,
-    }
+      baseURL: '' || process.env.GATEWAY_URL,
+    },
   ) {
     super(options);
     this.#options = options;
   }
 
   async setToken() {
-    const response = await authAPI.auth({ APIName: "Docs API" });
+    const response = await authAPI.auth({ APIName: 'Docs API' });
     this.#options.headers = {};
     this.#options.headers.Authorization = `Bearer ${response.data.data.access_token}`;
     this.#API = new DocsAPI(this.#options);

@@ -1,0 +1,18 @@
+{
+  "policy_status": {
+    "draft": 1,
+    "anulled": 3,
+    "cancelled": 6,
+    "issued": 8,
+    "waiting_for_payment": 10,
+    "paid": 11,
+    "in_process": 12
+  },
+  "payment_plan": {
+    "full": 1,
+    "three_months": 2,
+    "six_months": 3,
+    "twelve_months": 4,
+    "quarterly": 5
+  }
+}
