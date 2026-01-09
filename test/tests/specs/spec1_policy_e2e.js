@@ -23,6 +23,7 @@ const today = moment().format(DateFormats.DMY);
 
 const setPolicyTWB = async (policyNumber) => {
   if (JSONLoader.configData.setPolicyWaitingTWB) {
+    await onesDB.waitStatusCodeUpdate(policyNumber);
     const response = await TWBAPI.startSetPolicyWaiting();
     response.status.should.be.equal(200);
     response.data.should.containSubset(
@@ -64,64 +65,6 @@ describe('Casco API test suite. Policy:', async () => {
       Logger.log(this.currentTest.state);
     }
   });
-
-  // TODO: перенести закомментированные тесты в отдельные спеки
-
-  // it('Test create policy draft:', async () => {
-  //   const response = await cascoAPI.createPolicyDraft();
-  //   response.status.should.be.equal(201);
-
-  //   const policyStatus = response.data.data.status_id;
-
-  //   response.data.should.containSubset(
-  //     JSONLoader.templateResponse.createPolicy,
-  //   );
-  //   response.data.should.be.jsonSchema(JSONLoader.createPolicyResponseSchema);
-
-  //   policyStatus.should.be.equal(JSONLoader.dictCasco.policy_status.draft);
-
-  //   // ВОПРОС: нужно ли проверять, что задались верные значения
-  //   // user_id, agent_id, manager_id, subagent_id?
-  // });
-
-  // it('Test create vehicle for policy:', async () => {
-  //   const policy = await cascoAPI.createPolicyDraft();
-  //   const policyId = policy.data.data.id;
-
-  //   const vehiclePayload = JSONLoader.testCars.passenger;
-  //   const response = await cascoAPI.createVehicle(policyId, vehiclePayload);
-
-  //   response.status.should.be.equal(201);
-  //   response.data.should.containSubset(JSONLoader.templateResponse.createVehicle);
-  //   response.data.should.be.jsonSchema(JSONLoader.createVehicleResponseSchema);
-  // });
-
-  // it('Test set tariff for policy vehicle:', async () => {
-  //   const policy = await cascoAPI.createPolicyDraft();
-  //   const policyId = policy.data.data.id;
-
-  //   const vehiclePayload = JSONLoader.testCars.passenger;
-  //   const vehicle = await cascoAPI.createPolicyVehicle(policyId, vehiclePayload);
-  //   const vehicleId = vehicle.data.data.id;
-
-  //   const tariffs = await cascoAPI.getTariffs();
-  //   tariffs.status.should.be.equal(200);
-  //   const randomInt = Randomizer.getRandomInteger(tariffs.data.data.data.length - 1);
-  //   const randomTariff = tariffs.data.data.data[randomInt];
-
-  //   const payload = {
-  //     is_new: 1,
-  //     market_value: vehicle.data.data.pivot.insurance_sum,
-  //     insurance_sum: vehicle.data.data.pivot.insurance_sum,
-  //     tariff_id: randomTariff.id,
-  //   };
-
-  //   const response = await cascoAPI.updatePolicyVehicle(policyId, vehicleId, payload);
-
-  //   response.status.should.be.equal(200);
-  //   response.data.should.containSubset(JSONLoader.templateResponse.updatePolicyVehicle);
-  //   response.data.should.be.jsonSchema(JSONLoader.setTariffForPolicyVehicleResponseSchema);
-  // });
 
   it('Test set policy', async () => {
     Logger.log('Creating policy draft...');
@@ -211,4 +154,66 @@ describe('Casco API test suite. Policy:', async () => {
     Logger.log(`Setting policy with policy_number: ${policyNumber} in TWB...`);
     await setPolicyTWB(policyNumber);
   });
+
+  it('Test cancel policy', async () => {
+
+  });
+
+  // TODO: перенести закомментированные тесты в отдельные спеки
+
+  // it('Test create policy draft:', async () => {
+  //   const response = await cascoAPI.createPolicyDraft();
+  //   response.status.should.be.equal(201);
+
+  //   const policyStatus = response.data.data.status_id;
+
+  //   response.data.should.containSubset(
+  //     JSONLoader.templateResponse.createPolicy,
+  //   );
+  //   response.data.should.be.jsonSchema(JSONLoader.createPolicyResponseSchema);
+
+  //   policyStatus.should.be.equal(JSONLoader.dictCasco.policy_status.draft);
+
+  //   // ВОПРОС: нужно ли проверять, что задались верные значения
+  //   // user_id, agent_id, manager_id, subagent_id?
+  // });
+
+  // it('Test create vehicle for policy:', async () => {
+  //   const policy = await cascoAPI.createPolicyDraft();
+  //   const policyId = policy.data.data.id;
+
+  //   const vehiclePayload = JSONLoader.testCars.passenger;
+  //   const response = await cascoAPI.createVehicle(policyId, vehiclePayload);
+
+  //   response.status.should.be.equal(201);
+  //   response.data.should.containSubset(JSONLoader.templateResponse.createVehicle);
+  //   response.data.should.be.jsonSchema(JSONLoader.createVehicleResponseSchema);
+  // });
+
+  // it('Test set tariff for policy vehicle:', async () => {
+  //   const policy = await cascoAPI.createPolicyDraft();
+  //   const policyId = policy.data.data.id;
+
+  //   const vehiclePayload = JSONLoader.testCars.passenger;
+  //   const vehicle = await cascoAPI.createPolicyVehicle(policyId, vehiclePayload);
+  //   const vehicleId = vehicle.data.data.id;
+
+  //   const tariffs = await cascoAPI.getTariffs();
+  //   tariffs.status.should.be.equal(200);
+  //   const randomInt = Randomizer.getRandomInteger(tariffs.data.data.data.length - 1);
+  //   const randomTariff = tariffs.data.data.data[randomInt];
+
+  //   const payload = {
+  //     is_new: 1,
+  //     market_value: vehicle.data.data.pivot.insurance_sum,
+  //     insurance_sum: vehicle.data.data.pivot.insurance_sum,
+  //     tariff_id: randomTariff.id,
+  //   };
+
+  //   const response = await cascoAPI.updatePolicyVehicle(policyId, vehicleId, payload);
+
+  //   response.status.should.be.equal(200);
+  //   response.data.should.containSubset(JSONLoader.templateResponse.updatePolicyVehicle);
+  //   response.data.should.be.jsonSchema(JSONLoader.setTariffForPolicyVehicleResponseSchema);
+  // });
 });
