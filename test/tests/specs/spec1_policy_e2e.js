@@ -207,6 +207,8 @@ describe('Casco API test suite. Policy:', async () => {
     const issuePolicyResponse = await cascoAPI.issuePolicy(policyId, issuePolicyPayload);
     issuePolicyResponse.status.should.be.equal(200);
 
-    // TODO: просадить полис в 1c
+    const policyNumber = issuePolicyResponse.data.data.number;
+    Logger.log(`Setting policy with policy_number: ${policyNumber} in TWB...`);
+    await setPolicyTWB(policyNumber);
   });
 });
