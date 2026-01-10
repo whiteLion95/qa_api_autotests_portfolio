@@ -148,6 +148,21 @@ class CascoAPI extends BaseAPI {
 
     return response;
   }
+
+  async cancelPolicy(policyId, policyNumber) {
+    const response = await this.#API.put(
+      `${JSONLoader.APIEndpoints.casco.policies}/${policyId}`,
+      {
+        status: JSONLoader.dictCasco.policy_status.cancelled,
+      },
+    );
+
+    if (response.status === 200) {
+      Logger.log(`Policy with ID: ${policyId}${policyNumber ? `, Number: ${policyNumber}` : ''} cancelled.`);
+    }
+
+    return response;
+  }
 }
 
 module.exports = new CascoAPI();

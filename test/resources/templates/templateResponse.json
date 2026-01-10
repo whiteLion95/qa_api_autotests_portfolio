@@ -28,7 +28,8 @@
     "message": "Полис успешно выписан!"
   },
   "cancelPolicy": {
-    "message": "Полис помечен ошибкой оператора."
+    "success": true,
+    "message": "Полис успешно отменен."
   },
   "setPolicyTWB": {
     "status": 1
@@ -46,5 +47,14 @@
   },
   "getFile": {
     "success": true
+  },
+  "getCancelledPolicyFromTWB": {
+    "contracts": [],
+    "status": false,
+    "errors": {
+      "contracts": [
+        "Данные отсутствуют или договор помечен на удаление!"
+      ]
+    }
   }
 }

@@ -31,7 +31,8 @@
     "startSetPolicyWaiting": "StartSetPolicyWaiting",
     "getPolicy": "GetPolicy",
     "setPolicy": "SetPolicy",
-    "setCancellation": "SetCancellation"
+    "setCancellation": "SetCancellation",
+    "waitingCleanUp": "WaitingCleanup"
   },
   "KASKO": {
     "getCarAveragePrice": "api/kasko/get-car-average-price",

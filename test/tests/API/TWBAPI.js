@@ -1,5 +1,5 @@
 const path = require('path');
-const { BaseAPI } = require('@amanat-qa/utils-backend');
+const { BaseAPI, Logger } = require('@amanat-qa/utils-backend');
 const JSONLoader = require('../../main/utils/data/JSONLoader');
 require('dotenv').config({
   path: path.join(__dirname, '../../../', '.env.test'),
@@ -45,6 +45,16 @@ class TWBAPI extends BaseAPI {
     };
 
     return this.post(JSONLoader.APIEndpoints.TWB.setCancellation, params);
+  }
+
+  async waitingCleanUp() {
+    const response = this.get(JSONLoader.APIEndpoints.TWB.waitingCleanUp);
+
+    if (response.status === 200) {
+      Logger.log('TWB waiting cleanup completed.');
+    }
+
+    return response;
   }
 }
 

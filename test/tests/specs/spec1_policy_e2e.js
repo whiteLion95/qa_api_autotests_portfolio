@@ -21,37 +21,156 @@ chai.use(require('chai-json-schema'));
 
 const today = moment().format(DateFormats.DMY);
 
+// #region Helper functions
+const startSetPolicyWaiting = async (withCleanUp = false) => {
+  if (withCleanUp) {
+    await TWBAPI.waitingCleanUp();
+  }
+
+  const response = await TWBAPI.startSetPolicyWaiting();
+  response.status.should.be.equal(200);
+  response.data.should.containSubset(
+    JSONLoader.templateResponse.startSetPolicyWaiting,
+  );
+};
+
+// Directly sets policy in TWB without waiting
+const setPolicyDirectly = async (policyNumber) => {
+  const onesContent = await onesDB.getOnesContent(policyNumber);
+  const response = await TWBAPI.setPolicy(onesContent);
+  response.status.should.be.equal(200);
+  response.data.should.containSubset(
+    JSONLoader.templateResponse.setPolicyTWB,
+  );
+  response.data.message.should.be.equal(
+    `Договор №${policyNumber} от ${today} успешно создан!`,
+  );
+};
+
 const setPolicyTWB = async (policyNumber) => {
   if (JSONLoader.configData.setPolicyWaitingTWB) {
     await onesDB.waitStatusCodeUpdate(policyNumber);
-    const response = await TWBAPI.startSetPolicyWaiting();
-    response.status.should.be.equal(200);
-    response.data.should.containSubset(
-      JSONLoader.templateResponse.startSetPolicyWaiting,
-    );
+    await startSetPolicyWaiting(true);
   } else {
-    const onesContent = await onesDB.getOnesContent(policyNumber);
-    const response = await TWBAPI.setPolicy(onesContent);
-    response.status.should.be.equal(200);
-    response.data.should.containSubset(
-      JSONLoader.templateResponse.setPolicyTWB,
-    );
-    response.data.message.should.be.equal(
-      `Договор №${policyNumber} от ${today} успешно создан!`,
-    );
+    await setPolicyDirectly(policyNumber);
   }
 };
 
-const getIssuedPolicy = async (policyNumber) => {
+const getPolicyFrom1c = async (policyNumber) => {
   const getPolicyResponse = JSONLoader.configData.getPolicyTWB
     ? await TWBAPI.getPolicy(policyNumber)
     : await onesAPI.getPolicy(policyNumber);
+
+  return getPolicyResponse;
+};
+
+// Creates policy in Casco API
+const createPolicy = async () => {
+  Logger.log('Creating policy draft...');
+  const createPolicyDraftResponse = await cascoAPI.createPolicyDraft();
+  createPolicyDraftResponse.status.should.be.equal(201);
+  const policyId = createPolicyDraftResponse.data.data.id;
+
+  Logger.log('Creating vehicle for policy...');
+  const vehiclePayload = JSONLoader.testCars.passenger;
+  const createVehicleResponse = await cascoAPI.createPolicyVehicle(policyId, vehiclePayload);
+  createVehicleResponse.status.should.be.equal(201);
+  const vehicleId = createVehicleResponse.data.data.id;
+
+  Logger.log('Setting tariff for policy vehicle...');
+  const tariffs = await cascoAPI.getTariffs();
+  tariffs.status.should.be.equal(200);
+  const randomInt = Randomizer.getRandomInteger(tariffs.data.data.data.length - 1);
+  const randomTariff = tariffs.data.data.data[randomInt];
+  const setTariffPayload = {
+    is_new: 1,
+    market_value: createVehicleResponse.data.data.pivot.insurance_sum,
+    insurance_sum: createVehicleResponse.data.data.pivot.insurance_sum,
+    tariff_id: randomTariff.id,
+  };
+  const setTariffResponse = await cascoAPI
+    .updatePolicyVehicle(policyId, vehicleId, setTariffPayload);
+  setTariffResponse.status.should.be.equal(200);
+
+  Logger.log('Creating client for policy...');
+  const testClientPayload = JSONLoader.createClientPayloads.policyHolder;
+  const createClientResponse = await cascoAPI.createClient(policyId, testClientPayload);
+  createClientResponse.status.should.be.equal(200);
+
+  Logger.log('Creating beneficiary for policy...');
+  const beneficiaryPayload = JSONLoader.createClientPayloads.beneficiary;
+  const createBeneficiaryResponse = await cascoAPI.createClient(policyId, beneficiaryPayload);
+  createBeneficiaryResponse.status.should.be.equal(200);
+
+  Logger.log('Creating payment...');
+  const getPolicyResponse = await cascoAPI.getPolicy(policyId);
+  getPolicyResponse.status.should.be.equal(200);
+  const {
+    premium,
+    program: { id: programId },
+  } = getPolicyResponse.data.data;
+
+  const insurancePeriodsResponse = await cascoAPI.getInsurancePeriods({ program_id: programId });
+  insurancePeriodsResponse.status.should.be.equal(200);
+  const randomInsurancePeriodId = Randomizer
+    .getRandomInteger(insurancePeriodsResponse.data.data.length, 1);
+  const insurancePeriodInMonths = insurancePeriodsResponse
+    .data.data[randomInsurancePeriodId - 1].months_value;
+  const startDateMoment = moment().add(1, 'days');
+  const startDate = startDateMoment.format(DateFormats.DMY);
+  const endDate = startDateMoment.clone()
+    .add(insurancePeriodInMonths, 'months')
+    .add(-1, 'days')
+    .format(DateFormats.DMY);
+
+  const paymentPlanId = JSONLoader.dictCasco.payment_plan.full;
+  const paymentScheduleResponse = await cascoAPI
+    .getPaymentSchedule(policyId, startDate, paymentPlanId);
+  paymentScheduleResponse.status.should.be.equal(200);
+
+  const paymentPayload = {
+    payment_plan_id: paymentPlanId,
+    schedule: [
+      {
+        date: paymentScheduleResponse.data.data[0].date,
+        amount: premium,
+      },
+    ],
+  };
+  const createPaymentResponse = await cascoAPI.createPayment(policyId, paymentPayload);
+  createPaymentResponse.status.should.be.equal(201);
+
+  Logger.log('Issuing policy...');
+  const issuePolicyPayload = {
+    insurance_period_id: randomInsurancePeriodId,
+    start_date: startDate,
+    end_date: endDate,
+  };
+  const issuePolicyResponse = await cascoAPI.issuePolicy(policyId, issuePolicyPayload);
+  issuePolicyResponse.status.should.be.equal(200);
+
+  const policyNumber = issuePolicyResponse.data.data.number;
+
+  return { policyId, policyNumber };
+};
+
+// Creates and sets policy in TWB with verification
+const createAndSetPolicy = async () => {
+  const { policyId, policyNumber } = await createPolicy();
+
+  Logger.log(`Setting policy with policy_number: ${policyNumber} in TWB...`);
+  await setPolicyTWB(policyNumber);
+
+  // Verify policy was set correctly in TWB
+  const getPolicyResponse = await getPolicyFrom1c(policyNumber);
   getPolicyResponse.status.should.be.equal(200);
   getPolicyResponse.data.contracts[0].policy_status.should.be.equal(
     JSONLoader.dictOnes.policy_status.issued,
   );
-  return getPolicyResponse;
+
+  return { policyId, policyNumber };
 };
+// #endregion
 
 describe('Casco API test suite. Policy:', async () => {
   // eslint-disable-next-line func-names
@@ -67,96 +186,27 @@ describe('Casco API test suite. Policy:', async () => {
   });
 
   it('Test set policy', async () => {
-    Logger.log('Creating policy draft...');
-    const createPolicyDraftResponse = await cascoAPI.createPolicyDraft();
-    createPolicyDraftResponse.status.should.be.equal(201);
-    const policyId = createPolicyDraftResponse.data.data.id;
-
-    Logger.log('Creating vehicle for policy...');
-    const vehiclePayload = JSONLoader.testCars.passenger;
-    const createVehicleResponse = await cascoAPI.createPolicyVehicle(policyId, vehiclePayload);
-    createVehicleResponse.status.should.be.equal(201);
-    const vehicleId = createVehicleResponse.data.data.id;
-
-    Logger.log('Setting tariff for policy vehicle...');
-    const tariffs = await cascoAPI.getTariffs();
-    tariffs.status.should.be.equal(200);
-    const randomInt = Randomizer.getRandomInteger(tariffs.data.data.data.length - 1);
-    const randomTariff = tariffs.data.data.data[randomInt];
-    const setTariffPayload = {
-      is_new: 1,
-      market_value: createVehicleResponse.data.data.pivot.insurance_sum,
-      insurance_sum: createVehicleResponse.data.data.pivot.insurance_sum,
-      tariff_id: randomTariff.id,
-    };
-    const setTariffResponse = await cascoAPI
-      .updatePolicyVehicle(policyId, vehicleId, setTariffPayload);
-    setTariffResponse.status.should.be.equal(200);
-
-    Logger.log('Creating client for policy...');
-    const testClientPayload = JSONLoader.createClientPayloads.policyHolder;
-    const createClientResponse = await cascoAPI.createClient(policyId, testClientPayload);
-    createClientResponse.status.should.be.equal(200);
-
-    Logger.log('Creating beneficiary for policy...');
-    const beneficiaryPayload = JSONLoader.createClientPayloads.beneficiary;
-    const createBeneficiaryResponse = await cascoAPI.createClient(policyId, beneficiaryPayload);
-    createBeneficiaryResponse.status.should.be.equal(200);
-
-    Logger.log('Creating payment...');
-    const getPolicyResponse = await cascoAPI.getPolicy(policyId);
-    getPolicyResponse.status.should.be.equal(200);
-    const {
-      premium,
-      program: { id: programId },
-    } = getPolicyResponse.data.data;
-
-    const insurancePeriodsResponse = await cascoAPI.getInsurancePeriods({ program_id: programId });
-    insurancePeriodsResponse.status.should.be.equal(200);
-    const randomInsurancePeriodId = Randomizer
-      .getRandomInteger(insurancePeriodsResponse.data.data.length, 1);
-    const insurancePeriodInMonths = insurancePeriodsResponse
-      .data.data[randomInsurancePeriodId - 1].months_value;
-    const startDateMoment = moment().add(1, 'days');
-    const startDate = startDateMoment.format(DateFormats.DMY);
-    const endDate = startDateMoment.clone()
-      .add(insurancePeriodInMonths, 'months')
-      .add(-1, 'days')
-      .format(DateFormats.DMY);
-
-    const paymentPlanId = JSONLoader.dictCasco.payment_plan.full;
-    const paymentScheduleResponse = await cascoAPI
-      .getPaymentSchedule(policyId, startDate, paymentPlanId);
-    paymentScheduleResponse.status.should.be.equal(200);
-
-    const paymentPayload = {
-      payment_plan_id: paymentPlanId,
-      schedule: [
-        {
-          date: paymentScheduleResponse.data.data[0].date,
-          amount: premium,
-        },
-      ],
-    };
-    const createPaymentResponse = await cascoAPI.createPayment(policyId, paymentPayload);
-    createPaymentResponse.status.should.be.equal(201);
-
-    Logger.log('Issuing policy...');
-    const issuePolicyPayload = {
-      insurance_period_id: randomInsurancePeriodId,
-      start_date: startDate,
-      end_date: endDate,
-    };
-    const issuePolicyResponse = await cascoAPI.issuePolicy(policyId, issuePolicyPayload);
-    issuePolicyResponse.status.should.be.equal(200);
-
-    const policyNumber = issuePolicyResponse.data.data.number;
-    Logger.log(`Setting policy with policy_number: ${policyNumber} in TWB...`);
-    await setPolicyTWB(policyNumber);
+    await createAndSetPolicy();
   });
 
   it('Test cancel policy', async () => {
+    const { policyId, policyNumber } = await createAndSetPolicy();
+    await TWBAPI.waitingCleanUp();
 
+    Logger.log('Cancelling policy...');
+    const cancelPolicyResponse = await cascoAPI.cancelPolicy(policyId, policyNumber);
+    cancelPolicyResponse.status.should.be.equal(200);
+    cancelPolicyResponse.data.should.containSubset(
+      JSONLoader.templateResponse.cancelPolicy,
+    );
+    cancelPolicyResponse.data.data.status.id
+      .should.be.equal(JSONLoader.dictCasco.policy_status.cancelled);
+
+    await startSetPolicyWaiting();
+    const getPolicyFrom1cResponse = await getPolicyFrom1c(policyNumber);
+    getPolicyFrom1cResponse.status.should.be.equal(422);
+    getPolicyFrom1cResponse.data.should
+      .deep.equal(JSONLoader.templateResponse.getCancelledPolicyFromTWB);
   });
 
   // TODO: перенести закомментированные тесты в отдельные спеки
