@@ -187,6 +187,7 @@ describe('Casco API test suite. Policy:', async () => {
 
   it('Test set policy', async () => {
     await createAndSetPolicy();
+    // TODO: добавить проверки соответствия данных полиса в TWB
   });
 
   it('Test cancel policy', async () => {
@@ -194,7 +195,7 @@ describe('Casco API test suite. Policy:', async () => {
     await TWBAPI.waitingCleanUp();
 
     Logger.log('Cancelling policy...');
-    const cancelPolicyResponse = await cascoAPI.cancelPolicy(policyId, policyNumber);
+    const cancelPolicyResponse = await cascoAPI.cancelPolicy(policyId);
     cancelPolicyResponse.status.should.be.equal(200);
     cancelPolicyResponse.data.should.containSubset(
       JSONLoader.templateResponse.cancelPolicy,

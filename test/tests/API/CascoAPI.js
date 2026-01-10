@@ -143,13 +143,13 @@ class CascoAPI extends BaseAPI {
     );
 
     if (response.status === 200) {
-      Logger.log(`Policy with ID: ${policyId} issued.`);
+      Logger.log(`Policy with ID: ${policyId}, Number: ${response.data.data.number} issued.`);
     }
 
     return response;
   }
 
-  async cancelPolicy(policyId, policyNumber) {
+  async cancelPolicy(policyId) {
     const response = await this.#API.put(
       `${JSONLoader.APIEndpoints.casco.policies}/${policyId}`,
       {
@@ -158,7 +158,7 @@ class CascoAPI extends BaseAPI {
     );
 
     if (response.status === 200) {
-      Logger.log(`Policy with ID: ${policyId}${policyNumber ? `, Number: ${policyNumber}` : ''} cancelled.`);
+      Logger.log(`Policy with ID: ${policyId}, Number: ${response.data.data.number} cancelled.`);
     }
 
     return response;
