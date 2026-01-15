@@ -1,18 +1,14 @@
-/* eslint-disable no-unused-vars */
 const chai = require('chai/index.js');
 const moment = require('moment');
 const {
   Logger,
-  DataUtils,
   Randomizer,
   DateFormats,
 } = require('@amanat-qa/utils-backend');
 const onesDB = require('../DB/onesDB');
 const TWBAPI = require('../API/TWBAPI');
 const onesAPI = require('../API/onesAPI');
-const ESBDAPI = require('../API/ESBDAPI');
-const cascoAPI = require('../API/CascoAPI');
-const authAPI = require('../API/authAPI');
+const cascoAPI = require('../API/cascoAPI');
 const JSONLoader = require('../../main/utils/data/JSONLoader');
 
 chai.should();
@@ -56,7 +52,7 @@ const setPolicyTWB = async (policyNumber) => {
   }
 };
 
-const getPolicyFrom1c = async (policyNumber) => {
+const getPolicyFromOnes = async (policyNumber) => {
   const getPolicyResponse = JSONLoader.configData.getPolicyTWB
     ? await TWBAPI.getPolicy(policyNumber)
     : await onesAPI.getPolicy(policyNumber);
@@ -162,7 +158,7 @@ const createAndSetPolicy = async () => {
   await setPolicyTWB(policyNumber);
 
   // Verify policy was set correctly in TWB
-  const getPolicyResponse = await getPolicyFrom1c(policyNumber);
+  const getPolicyResponse = await getPolicyFromOnes(policyNumber);
   getPolicyResponse.status.should.be.equal(200);
   getPolicyResponse.data.contracts[0].policy_status.should.be.equal(
     JSONLoader.dictOnes.policy_status.issued,
@@ -204,30 +200,13 @@ describe('Casco API test suite. Policy:', async () => {
       .should.be.equal(JSONLoader.dictCasco.policy_status.cancelled);
 
     await startSetPolicyWaiting();
-    const getPolicyFrom1cResponse = await getPolicyFrom1c(policyNumber);
+    const getPolicyFrom1cResponse = await getPolicyFromOnes(policyNumber);
     getPolicyFrom1cResponse.status.should.be.equal(422);
     getPolicyFrom1cResponse.data.should
       .deep.equal(JSONLoader.templateResponse.getCancelledPolicyFromTWB);
   });
 
   // TODO: перенести закомментированные тесты в отдельные спеки
-
-  // it('Test create policy draft:', async () => {
-  //   const response = await cascoAPI.createPolicyDraft();
-  //   response.status.should.be.equal(201);
-
-  //   const policyStatus = response.data.data.status_id;
-
-  //   response.data.should.containSubset(
-  //     JSONLoader.templateResponse.createPolicy,
-  //   );
-  //   response.data.should.be.jsonSchema(JSONLoader.createPolicyResponseSchema);
-
-  //   policyStatus.should.be.equal(JSONLoader.dictCasco.policy_status.draft);
-
-  //   // ВОПРОС: нужно ли проверять, что задались верные значения
-  //   // user_id, agent_id, manager_id, subagent_id?
-  // });
 
   // it('Test create vehicle for policy:', async () => {
   //   const policy = await cascoAPI.createPolicyDraft();

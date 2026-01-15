@@ -163,6 +163,18 @@ class CascoAPI extends BaseAPI {
 
     return response;
   }
+
+  async deletePolicy(policyId) {
+    const response = await this.#API.delete(
+      `${JSONLoader.APIEndpoints.casco.policies}/${policyId}`,
+    );
+
+    if (response.status === 200) {
+      Logger.log(`Policy with ID: ${policyId} deleted.`);
+    }
+
+    return response;
+  }
 }
 
 module.exports = new CascoAPI();

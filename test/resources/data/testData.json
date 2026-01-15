@@ -17,5 +17,6 @@
   "unreliable_client": 0,
   "mobile_phone": "+77066682051",
   "filePathForUploadMethod": "../../resources/files/fileForUploadMethod.pdf",
-  "filePathForTitle": "archive/contracts"
+  "filePathForTitle": "archive/contracts",
+  "vehicleCounts": [1, 3]
 }

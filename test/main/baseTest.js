@@ -3,12 +3,15 @@ const moment = require('moment-timezone');
 const { readFileSync, createWriteStream } = require('fs');
 const allureCommandline = require('allure-commandline');
 const { Logger } = require('@amanat-qa/utils-backend');
+const chai = require('chai');
+chai.use(require('chai-subset'));
+chai.use(require('chai-json-schema'));
 const onesDB = require('../tests/DB/onesDB');
 const authAPI = require('../tests/API/authAPI');
 const docsAPI = require('../tests/API/docsAPI');
 const onesAPI = require('../tests/API/onesAPI');
 const ESBDAPI = require('../tests/API/ESBDAPI');
-const cascoAPI = require('../tests/API/CascoAPI');
+const cascoAPI = require('../tests/API/cascoAPI');
 const dictionaryAPI = require('../tests/API/dictionaryAPI');
 const JSONLoader = require('./utils/data/JSONLoader');
 
@@ -21,6 +24,8 @@ const configDataFileLocation = path.join(
   __dirname,
   '../resources/data/configData.json',
 );
+
+chai.should();
 
 const generateAllureReport = async () => {
   Logger.log('[inf] ▶ generate allure report');
