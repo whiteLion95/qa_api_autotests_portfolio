@@ -1,4 +1,7 @@
 const { suiteHooks, caseHooks, itHooks } = require('../../main/hooks');
+const { issuePolicy } = require('../specs/issuePolicy');
+const { setPolicyToTWB } = require('../specs/setPolicyToTWB');
+const { cancelPolicy } = require('../specs/cancelPolicy');
 const JSONLoader = require('../../main/utils/data/JSONLoader');
 
 describe('Test suite: Set and cancel policy', function () { // eslint-disable-line func-names
@@ -9,7 +12,9 @@ describe('Test suite: Set and cancel policy', function () { // eslint-disable-li
       caseHooks({ caseTitle: this.title });
       itHooks();
 
-      // TODO: set and cancel policy test cases
+      issuePolicy(vehicleCount);
+      setPolicyToTWB();
+      cancelPolicy();
     });
   });
 });
