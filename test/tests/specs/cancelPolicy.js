@@ -2,8 +2,8 @@ const JSONLoader = require('../../main/utils/data/JSONLoader');
 const TWBHelpers = require('../helpers/TWBHelpers');
 const cascoAPI = require('../API/cascoAPI');
 
-exports.cancelPolicy = function () { // eslint-disable-line func-names, no-unused-vars
-  it('Test: cancel policy', async function () { // eslint-disable-line func-names, prefer-arrow-callback
+exports.cancelPolicy = function () { // eslint-disable-line func-names
+  it('cancel policy', async function () { // eslint-disable-line func-names, prefer-arrow-callback
     await TWBHelpers.waitingCleanUp();
 
     const cancelPolicyResponse = await cascoAPI.cancelPolicy(this.policyId);
