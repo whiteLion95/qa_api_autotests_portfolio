@@ -34,15 +34,6 @@
     "setCancellation": "SetCancellation",
     "waitingCleanUp": "WaitingCleanup"
   },
-  "KASKO": {
-    "getCarAveragePrice": "api/kasko/get-car-average-price",
-    "issueTariffs": "api/kasko/issue/tariffs",
-    "getCar": "api/kasko/get-car",
-    "setPolicy": "api/kasko/set-policy",
-    "policies": "api/kasko/policies",
-    "cancelPolicy": "api/kasko/cancel-policy",
-    "uploadFile": "api/kasko/upload-file"
-  },
   "casco": {
     "settings": "api/casco/settings",
     "cities": "api/casco/cities",

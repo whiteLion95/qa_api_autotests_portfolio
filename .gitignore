@@ -4,3 +4,4 @@ test/main/utils/data/JSONLoader.js
 .split-config.yml
 test/resources/data/testClients.json
 /.idea/
+.vscode/

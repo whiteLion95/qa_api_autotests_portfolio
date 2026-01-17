@@ -1,6 +1,5 @@
 const path = require('path');
-const { BaseDB, Logger } = require('@amanat-qa/utils-backend');
-const DataUtils = require('../../main/utils/data/dataUtilsExtended');
+const { BaseDB, Logger, DataUtils } = require('@amanat-qa/utils-backend');
 const JSONLoader = require('../../main/utils/data/JSONLoader');
 require('dotenv').config({
   path: path.join(__dirname, '../../../', '.env.test'),
