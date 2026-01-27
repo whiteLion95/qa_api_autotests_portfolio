@@ -1,6 +1,4 @@
-const path = require('path');
 const moment = require('moment-timezone');
-const { readFileSync, createWriteStream } = require('fs');
 const allureCommandline = require('allure-commandline');
 const { Logger } = require('@amanat-qa/utils-backend');
 const chai = require('chai');
@@ -14,16 +12,6 @@ const ESBDAPI = require('../tests/API/ESBDAPI');
 const cascoAPI = require('../tests/API/cascoAPI');
 const dictionaryAPI = require('../tests/API/dictionaryAPI');
 const JSONLoader = require('./utils/data/JSONLoader');
-
-const testClientsFileLocation = path.join(
-  __dirname,
-  '../resources/data/testClients.json',
-);
-
-const configDataFileLocation = path.join(
-  __dirname,
-  '../resources/data/configData.json',
-);
 
 chai.should();
 
@@ -72,23 +60,20 @@ exports.mochaHooks = {
     await cascoAPI.setToken();
     await dictionaryAPI.toggleVerification();
     await dictionaryAPI.toggleServer();
-    const configData = JSON.parse(readFileSync(configDataFileLocation, 'utf8'));
-    const response = await dictionaryAPI.getESBDValue();
-    global.withESBD = Boolean(JSON.parse(response.data.setting).value);
-    configData.withESBD = global.withESBD;
-    const configDataStream = createWriteStream(configDataFileLocation);
-    configDataStream.write(JSON.stringify(configData, null, 2));
-    const clients = await dictionaryAPI.fetchAllTestClients();
-    const testClientsStream = createWriteStream(testClientsFileLocation);
-    testClientsStream.write(JSON.stringify(clients.data, null, 2));
+  },
+  async afterEach() {
+    if (this.currentTest.state === 'failed') {
+      this.testFailed = true;
+    }
   },
   async afterAll() {
     await onesDB.closeConnection();
 
-    /* eslint no-unused-expressions: ["error", { "allowTernary": true }] */
-    this.test.parent.suites.some((suite) => suite.tests.some((test) => test.state === 'failed'))
-      ? Logger.log(JSONLoader.configData.failed)
-      : Logger.log(JSONLoader.configData.passed);
+    if (this.testFailed) {
+      Logger.log(JSONLoader.configData.failed);
+    } else {
+      Logger.log(JSONLoader.configData.passed);
+    }
 
     if (JSONLoader.configData.parallel) {
       Logger.logParallel();

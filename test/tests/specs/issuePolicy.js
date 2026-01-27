@@ -4,7 +4,7 @@ const cascoAPI = require('../API/cascoAPI');
 const JSONLoader = require('../../main/utils/data/JSONLoader');
 
 exports.issuePolicy = function (vehicleCount) { // eslint-disable-line func-names, no-unused-vars
-  it('create policy', async function () { // eslint-disable-line func-names, prefer-arrow-callback
+  it('issue policy', async function () { // eslint-disable-line func-names, prefer-arrow-callback
     // TODO: expand vehicle creation for multiple vehicles
     Logger.log('Creating policy draft...');
     const createPolicyDraftResponse = await cascoAPI.createPolicyDraft();
