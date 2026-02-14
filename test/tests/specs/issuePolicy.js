@@ -3,16 +3,15 @@ const moment = require('moment');
 const cascoAPI = require('../API/cascoAPI');
 const JSONLoader = require('../../main/utils/data/JSONLoader');
 
-exports.issuePolicy = function (vehicleCount) { // eslint-disable-line func-names, no-unused-vars
+exports.issuePolicy = function () { // eslint-disable-line func-names, no-unused-vars
   it('issue policy', async function () { // eslint-disable-line func-names, prefer-arrow-callback
-    // TODO: expand vehicle creation for multiple vehicles
     Logger.log('Creating policy draft...');
     const createPolicyDraftResponse = await cascoAPI.createPolicyDraft();
     createPolicyDraftResponse.status.should.be.equal(201);
     const policyId = createPolicyDraftResponse.data.data.id;
 
     Logger.log('Creating vehicle for policy...');
-    const vehiclePayload = JSONLoader.testCars.passenger;
+    const vehiclePayload = JSONLoader.vehiclePayloads.passenger[0];
     const createVehicleResponse = await cascoAPI.createPolicyVehicle(policyId, vehiclePayload);
     createVehicleResponse.status.should.be.equal(201);
     const vehicleId = createVehicleResponse.data.data.id;
@@ -33,12 +32,13 @@ exports.issuePolicy = function (vehicleCount) { // eslint-disable-line func-name
     setTariffResponse.status.should.be.equal(200);
 
     Logger.log('Creating client for policy...');
-    const testClientPayload = JSONLoader.createClientPayloads.policyHolder;
+    const testClientPayload = JSONLoader.createClientPayloads.natural_person_residents[0];
     const createClientResponse = await cascoAPI.createClient(policyId, testClientPayload);
     createClientResponse.status.should.be.equal(200);
 
     Logger.log('Creating beneficiary for policy...');
-    const beneficiaryPayload = JSONLoader.createClientPayloads.beneficiary;
+    const beneficiaryPayload = JSONLoader.createClientPayloads.natural_person_residents[1];
+    beneficiaryPayload.type_id = JSONLoader.dictCasco.client_type.beneficiaryDamageAndLoss;
     const createBeneficiaryResponse = await cascoAPI.createClient(policyId, beneficiaryPayload);
     createBeneficiaryResponse.status.should.be.equal(200);
 

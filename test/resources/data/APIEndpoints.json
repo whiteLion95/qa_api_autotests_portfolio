@@ -21,6 +21,7 @@
   },
   "casco": {
     "policies": "api/casco/policies",
-    "tariffs": "api/casco/tariffs"
+    "tariffs": "api/casco/tariffs",
+    "insurance-periods": "api/casco/insurance-periods"
   }
 }

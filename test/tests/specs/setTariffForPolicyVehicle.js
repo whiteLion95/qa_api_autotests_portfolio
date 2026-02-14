@@ -7,7 +7,7 @@ exports.setTariffForPolicyVehicle = function () { // eslint-disable-line func-na
     const policy = await cascoAPI.createPolicyDraft();
     const policyId = policy.data.data.id;
 
-    const vehiclePayload = JSONLoader.testCars.passenger;
+    const vehiclePayload = JSONLoader.vehiclePayloads.passenger[0];
     const vehicle = await cascoAPI.createPolicyVehicle(policyId, vehiclePayload);
     const vehicleId = vehicle.data.data.id;
 

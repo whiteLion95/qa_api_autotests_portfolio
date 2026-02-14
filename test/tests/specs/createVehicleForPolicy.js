@@ -3,7 +3,7 @@ const cascoAPI = require('../API/cascoAPI');
 
 exports.createVehicleForPolicy = function (policyId) { // eslint-disable-line func-names
   it('create vehicle for policy', async function () { // eslint-disable-line func-names, prefer-arrow-callback
-    const vehiclePayload = JSONLoader.testCars.passenger;
+    const vehiclePayload = JSONLoader.vehiclePayloads.passenger[0];
     const response = await cascoAPI.createVehicle(policyId, vehiclePayload);
 
     response.status.should.be.equal(201);

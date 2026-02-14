@@ -14,5 +14,12 @@
     "six_months": 3,
     "twelve_months": 4,
     "quarterly": 5
+  },
+  "client_type": {
+    "policy_holder": 1,
+    "insured": 2,
+    "beneficiaryDamage": 3,
+    "beneficicaryLoss": 4,
+    "beneficiaryDamageAndLoss": 5
   }
 }

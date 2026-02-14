@@ -2,19 +2,16 @@ const { suiteHooks, caseHooks, itHooks } = require('../../main/hooks');
 const { issuePolicy } = require('../specs/issuePolicy');
 const { setPolicyToTWB } = require('../specs/setPolicyToTWB');
 const { cancelPolicy } = require('../specs/cancelPolicy');
-const JSONLoader = require('../../main/utils/data/JSONLoader');
 
 describe('Test suite: Set and cancel policy', function () { // eslint-disable-line func-names
   suiteHooks({ suiteTitle: this.title });
 
-  JSONLoader.testData.vehicleCounts.forEach((vehicleCount) => {
-    describe(`vehicle count = ${vehicleCount}`, function () { // eslint-disable-line func-names
-      caseHooks({ caseTitle: this.title });
-      itHooks();
+  describe('Happy case: 1 passenger vehicle, natural person resident holder and beneficiary', function () { // eslint-disable-line func-names
+    caseHooks({ caseTitle: this.title });
+    itHooks();
 
-      issuePolicy(vehicleCount);
-      setPolicyToTWB();
-      cancelPolicy();
-    });
+    issuePolicy();
+    setPolicyToTWB();
+    cancelPolicy();
   });
 });
