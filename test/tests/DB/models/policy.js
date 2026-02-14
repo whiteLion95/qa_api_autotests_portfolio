@@ -1,10 +1,10 @@
 const { DataTypes } = require('sequelize');
-const { baseModel } = require('@amanat-qa/utils-backend');
+const { BaseModel } = require('@amanat-qa/utils-backend');
 
 module.exports = (sequelize) => sequelize.define(
   'Policy',
   {
-    ...baseModel.attributes,
+    ...BaseModel.attributes,
     policy_number: { type: DataTypes.STRING(255), allowNull: true },
     global_id: { type: DataTypes.STRING(255), allowNull: true },
     contract_id: { type: DataTypes.STRING(255), allowNull: true },
@@ -16,5 +16,5 @@ module.exports = (sequelize) => sequelize.define(
     sent_attempts: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
     views: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
   },
-  baseModel.getOptions({ tableName: 'policies', withSoftDelete: true }),
+  BaseModel.getOptions({ tableName: 'policies', withSoftDelete: true }),
 );

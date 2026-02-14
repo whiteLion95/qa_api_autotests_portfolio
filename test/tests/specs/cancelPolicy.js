@@ -4,8 +4,6 @@ const cascoAPI = require('../API/cascoAPI');
 
 exports.cancelPolicy = function () { // eslint-disable-line func-names
   it('cancel policy', async function () { // eslint-disable-line func-names, prefer-arrow-callback
-    await TWBHelpers.waitingCleanUp();
-
     const cancelPolicyResponse = await cascoAPI.cancelPolicy(this.policyId);
     cancelPolicyResponse.status.should.be.equal(200);
     cancelPolicyResponse.data.should.containSubset(

@@ -6,9 +6,7 @@ chai.use(require('chai-subset'));
 chai.use(require('chai-json-schema'));
 const onesDB = require('../tests/DB/onesDB');
 const authAPI = require('../tests/API/authAPI');
-const docsAPI = require('../tests/API/docsAPI');
 const onesAPI = require('../tests/API/onesAPI');
-const ESBDAPI = require('../tests/API/ESBDAPI');
 const cascoAPI = require('../tests/API/cascoAPI');
 const dictionaryAPI = require('../tests/API/dictionaryAPI');
 const JSONLoader = require('./utils/data/JSONLoader');
@@ -38,42 +36,41 @@ const generateAllureReport = async () => {
   });
 };
 
+const configureLoggingForParallel = () => {
+  if (JSONLoader.configData.parallel) {
+    const title = this.test.parent.suites[0].tests[0].file
+      .split('/')
+      .pop()
+      .split('.')
+      .reverse()
+      .pop();
+    Logger.log(`${title} test log:`, title);
+  }
+};
+
 exports.mochaHooks = {
   async beforeAll() {
     moment.tz.setDefault(JSONLoader.configData.timezone);
-    if (JSONLoader.configData.parallel) {
-      const title = this.test.parent.suites[0].tests[0].file
-        .split('/')
-        .pop()
-        .split('.')
-        .reverse()
-        .pop();
-      Logger.log(`${title} test log:`, title);
-    }
+    configureLoggingForParallel();
 
     await onesDB.createConnection();
     await authAPI.setToken();
     await onesAPI.setToken();
-    await ESBDAPI.setToken();
     await dictionaryAPI.setToken();
-    await docsAPI.setToken();
     await cascoAPI.setToken();
     await dictionaryAPI.toggleVerification();
     await dictionaryAPI.toggleServer();
   },
-  async afterEach() {
-    if (this.currentTest.state === 'failed') {
-      this.testFailed = true;
-    }
-  },
   async afterAll() {
     await onesDB.closeConnection();
 
-    if (this.testFailed) {
-      Logger.log(JSONLoader.configData.failed);
-    } else {
-      Logger.log(JSONLoader.configData.passed);
-    }
+    // eslint-disable-next-line no-unused-expressions
+    this.test.parent.suites.some((spec) => spec.suites
+      .some((suite) => suite.tests
+        .some((test) => test.state === 'failed'
+          || !test.state)))
+      ? Logger.log(JSONLoader.configData.failed)
+      : Logger.log(JSONLoader.configData.passed);
 
     if (JSONLoader.configData.parallel) {
       Logger.logParallel();

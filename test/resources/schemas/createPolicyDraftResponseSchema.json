@@ -1,5 +1,5 @@
 {
-  "title": "create policy response schema",
+  "title": "create policy draft response schema",
   "type": "object",
   "properties": {
     "success": {

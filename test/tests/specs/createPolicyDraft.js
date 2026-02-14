@@ -9,9 +9,9 @@ exports.createPolicyDraft = function () { // eslint-disable-line func-names, no-
     const policyStatus = response.data.data.status_id;
 
     response.data.should.containSubset(
-      JSONLoader.templateResponse.createPolicy,
+      JSONLoader.templateResponse.createPolicyDraft,
     );
-    response.data.should.be.jsonSchema(JSONLoader.createPolicyResponseSchema);
+    response.data.should.be.jsonSchema(JSONLoader.createPolicyDraftResponseSchema);
 
     policyStatus.should.be.equal(JSONLoader.dictCasco.policy_status.draft);
   });

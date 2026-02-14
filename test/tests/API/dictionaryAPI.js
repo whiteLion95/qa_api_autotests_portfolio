@@ -46,42 +46,6 @@ class DictionaryAPI extends BaseAPI {
       params,
     );
   }
-
-  async carMarks() {
-    return this.#API.get(JSONLoader.APIEndpoints.dictionary.carMarks);
-  }
-
-  async carModels() {
-    const params = {
-      'where[title]': JSONLoader.templateSetPolicy.cars.mark,
-    };
-
-    return this.#API.get(JSONLoader.APIEndpoints.dictionary.carModels, params);
-  }
-
-  async fetchAllTestClients() {
-    return this.#API.get(JSONLoader.APIEndpoints.dictionary.testClients);
-  }
-
-  async fetchAllTestCars() {
-    return this.#API.get(JSONLoader.APIEndpoints.dictionary.testCars);
-  }
-
-  async getWorkingDay(nextMonthFirstDay) {
-    const params = {
-      work_day_num: JSONLoader.testData.paymentDateBusinessDaysIncrement,
-      start_date: nextMonthFirstDay,
-    };
-
-    return this.#API.get(
-      JSONLoader.APIEndpoints.dictionary.weekendGetWorkDay,
-      params,
-    );
-  }
-
-  async getESBDValue() {
-    return this.#API.get(JSONLoader.APIEndpoints.dictionary.ESBD);
-  }
 }
 
 module.exports = new DictionaryAPI();

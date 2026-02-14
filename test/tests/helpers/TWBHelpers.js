@@ -6,11 +6,6 @@ const onesAPI = require('../API/onesAPI');
 const JSONLoader = require('../../main/utils/data/JSONLoader');
 
 class TWBHelpers {
-  static async waitingCleanUp() {
-    const response = await TWBAPI.waitingCleanUp();
-    response.status.should.be.equal(200);
-  }
-
   static async startSetPolicyWaiting() {
     const response = await TWBAPI.startSetPolicyWaiting();
     response.status.should.be.equal(200);
@@ -48,7 +43,7 @@ class TWBHelpers {
       : await onesAPI.getPolicy(policyNumber);
     getPolicyResponse.status.should.be.equal(422);
     getPolicyResponse.data.should
-      .deep.equal(JSONLoader.templateResponse.getCancelledPolicyFromTWB);
+      .deep.equal(JSONLoader.templateResponse.getCancelledPolicyTWB);
   }
 }
 

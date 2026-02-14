@@ -1,5 +1,5 @@
 {
-  "createPolicy": {
+  "createPolicyDraft": {
     "success": true,
     "message": "Полис успешно создан."
   },
@@ -11,22 +11,6 @@
     "success": true,
     "message": "Транспортное средство в полисе успешно обновлено"
   },
-  "issueTariffs": {
-    "success": true,
-    "message": "Success!"
-  },
-  "getCar": {
-    "success": true,
-    "message": "Данные успешно получены!"
-  },
-  "getCarAveragePrice": {
-    "success": true,
-    "message": "Данные успешно получены!"
-  },
-  "setPolicy": {
-    "success": true,
-    "message": "Полис успешно выписан!"
-  },
   "cancelPolicy": {
     "success": true,
     "message": "Полис успешно отменен."
@@ -34,21 +18,11 @@
   "setPolicyTWB": {
     "status": 1
   },
-  "setCancellationTWB": {
-    "status": 1
-  },
   "startSetPolicyWaiting": {
     "status": 1,
     "message": "Success"
   },
-  "uploadFile": {
-    "success": true,
-    "message": "Файл успешно загружен в хранилище"
-  },
-  "getFile": {
-    "success": true
-  },
-  "getCancelledPolicyFromTWB": {
+  "getCancelledPolicyTWB": {
     "contracts": [],
     "status": false,
     "errors": {

@@ -1,25 +1,11 @@
 {
   "auth": {
     "login": "api/login",
-    "testUsers": "api/auth/test-users",
-    "users": "api/auth/users"
+    "testUsers": "api/auth/test-users"
   },
   "dictionary": {
     "verifyBool": "api/dictionary/settings/verify_bool",
-    "servers": "api/dictionary/settings/5",
-    "carMarks": "api/dictionary/car-marks",
-    "carModels": "api/dictionary/car-models",
-    "testCars": "api/dictionary/test-cars",
-    "testClients": "api/dictionary/test-clients",
-    "weekendGetWorkDay": "api/dictionary/weekend/get-work-day",
-    "ESBD": "api/dictionary/settings/key/esbd",
-    "vehicle-types": "api/dictionary/vehicle-types",
-    "regions": "api/dictionary/regions",
-    "countries": "api/dictionary/countries",
-    "cities": "api/dictionary/cities",
-    "document-types": "api/dictionary/document-types",
-    "activity-kinds": "api/dictionary/activity-kinds",
-    "economics-sectors": "api/dictionary/economics-sectors"
+    "servers": "api/dictionary/settings/5"
   },
   "ones": {
     "callMethod": "api/ones/v2/ones/call-method"
@@ -31,18 +17,10 @@
     "startSetPolicyWaiting": "StartSetPolicyWaiting",
     "getPolicy": "GetPolicy",
     "setPolicy": "SetPolicy",
-    "setCancellation": "SetCancellation",
-    "waitingCleanUp": "WaitingCleanup"
+    "setCancellation": "SetCancellation"
   },
   "casco": {
-    "settings": "api/casco/settings",
-    "cities": "api/casco/cities",
     "policies": "api/casco/policies",
-    "tariffs": "api/casco/tariffs",
-    "insurance-periods": "api/casco/insurance-periods",
-    "payment-plans": "api/casco/payment-plans"
-  },
-  "docs": {
-    "getFile": "api/docs/get-file"
+    "tariffs": "api/casco/tariffs"
   }
 }

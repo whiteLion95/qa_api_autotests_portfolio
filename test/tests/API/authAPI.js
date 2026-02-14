@@ -62,14 +62,6 @@ class AuthAPI extends BaseAPI {
 
     return users[Randomizer.getRandomInteger(users.length - 1)];
   }
-
-  async getUserByLogin(login) {
-    return this.#API.get(`${JSONLoader.APIEndpoints.auth.users}/login/${login}`);
-  }
-
-  async getUserById(id) {
-    return this.#API.get(`${JSONLoader.APIEndpoints.auth.users}/${id}`);
-  }
 }
 
 module.exports = new AuthAPI();
