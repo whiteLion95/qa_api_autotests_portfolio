@@ -2,7 +2,7 @@ const JSONLoader = require('../../main/utils/data/JSONLoader');
 const cascoAPI = require('../API/cascoAPI');
 
 exports.createVehicleForPolicy = function (policyId) { // eslint-disable-line func-names
-  it('create vehicle for policy', async function () { // eslint-disable-line func-names, prefer-arrow-callback
+  it('create vehicle for policy', async () => {
     const vehiclePayload = JSONLoader.vehiclePayloads.passenger[0];
     const response = await cascoAPI.createVehicle(policyId, vehiclePayload);
 

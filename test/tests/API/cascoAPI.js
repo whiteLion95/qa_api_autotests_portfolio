@@ -104,7 +104,7 @@ class CascoAPI extends BaseAPI {
 
   async getInsurancePeriods(params = {}) {
     const response = await this.#API.get(
-      JSONLoader.APIEndpoints.casco['insurance-periods'],
+      JSONLoader.APIEndpoints.casco.insurancePeriods,
       {
         ...params,
       },

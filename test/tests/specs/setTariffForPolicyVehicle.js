@@ -3,7 +3,7 @@ const cascoAPI = require('../API/cascoAPI');
 const JSONLoader = require('../../main/utils/data/JSONLoader');
 
 exports.setTariffForPolicyVehicle = function () { // eslint-disable-line func-names
-  it('set tariff for policy vehicle', async function () { // eslint-disable-line func-names, prefer-arrow-callback
+  it('set tariff for policy vehicle', async () => {
     const policy = await cascoAPI.createPolicyDraft();
     const policyId = policy.data.data.id;
 

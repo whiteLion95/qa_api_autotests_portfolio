@@ -3,8 +3,8 @@ const moment = require('moment');
 const cascoAPI = require('../API/cascoAPI');
 const JSONLoader = require('../../main/utils/data/JSONLoader');
 
-exports.issuePolicy = function () { // eslint-disable-line func-names, no-unused-vars
-  it('issue policy', async function () { // eslint-disable-line func-names, prefer-arrow-callback
+exports.issuePolicy = function () { // eslint-disable-line func-names
+  it('issue policy', async function () { // eslint-disable-line func-names
     Logger.log('Creating policy draft...');
     const createPolicyDraftResponse = await cascoAPI.createPolicyDraft();
     createPolicyDraftResponse.status.should.be.equal(201);

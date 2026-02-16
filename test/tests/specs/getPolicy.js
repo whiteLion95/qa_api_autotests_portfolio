@@ -1,8 +1,8 @@
 const cascoAPI = require('../API/cascoAPI');
 const JSONLoader = require('../../main/utils/data/JSONLoader');
 
-exports.getPolicy = function () { // eslint-disable-line func-names, no-unused-vars
-  it('get policy', async function () { // eslint-disable-line func-names, prefer-arrow-callback
+exports.getPolicy = function () { // eslint-disable-line func-names
+  it('get policy', async () => {
     const policyDraftResponse = await cascoAPI.createPolicyDraft();
     policyDraftResponse.status.should.be.equal(201);
     const policyId = policyDraftResponse.data.data.id;

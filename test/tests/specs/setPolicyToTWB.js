@@ -3,7 +3,7 @@ const TWBHelpers = require('../helpers/TWBHelpers');
 const JSONLoader = require('../../main/utils/data/JSONLoader');
 
 exports.setPolicyToTWB = function () { // eslint-disable-line func-names
-  it('set policy to TWB', async function () { // eslint-disable-line func-names, prefer-arrow-callback
+  it('set policy to TWB', async function () { // eslint-disable-line func-names
     if (JSONLoader.configData.setPolicyWaitingTWB) {
       await onesDB.waitStatusCodeUpdate(this.policyNumber);
       await TWBHelpers.startSetPolicyWaiting();
