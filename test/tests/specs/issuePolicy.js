@@ -89,6 +89,7 @@ exports.issuePolicy = function () { // eslint-disable-line func-names
     const issuePolicyResponse = await cascoAPI.issuePolicy(policyId, issuePolicyPayload);
     issuePolicyResponse.status.should.be.equal(200);
 
+    // Сохраняем id и номер полиса для дальнейшего использования в тестах в пределах suite1
     this.policyId = policyId;
     this.policyNumber = issuePolicyResponse.data.data.number;
   });

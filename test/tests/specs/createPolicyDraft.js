@@ -15,6 +15,7 @@ exports.createPolicyDraft = function () { // eslint-disable-line func-names
 
     policyStatus.should.be.equal(JSONLoader.dictCasco.policy_status.draft);
 
+    // Сохраняем id полиса для дальнейшего использования в тестах в пределах suite2
     this.policyId = response.data.data.id;
   });
 };
