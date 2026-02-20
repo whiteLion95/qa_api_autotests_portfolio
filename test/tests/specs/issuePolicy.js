@@ -38,7 +38,7 @@ exports.issuePolicy = function () { // eslint-disable-line func-names
 
     Logger.log('Creating beneficiary for policy...');
     const beneficiaryPayload = JSONLoader.createClientPayloads.natural_person_residents[1];
-    beneficiaryPayload.type_id = JSONLoader.dictCasco.client_type.beneficiaryDamageAndLoss;
+    beneficiaryPayload.type_id = JSONLoader.dictCasco.client_type.beneficiary_both;
     const createBeneficiaryResponse = await cascoAPI.createClient(policyId, beneficiaryPayload);
     createBeneficiaryResponse.status.should.be.equal(200);
 
@@ -63,7 +63,7 @@ exports.issuePolicy = function () { // eslint-disable-line func-names
       .add(-1, 'days')
       .format(DateFormats.DMY);
 
-    const paymentPlanId = JSONLoader.dictCasco.payment_plan.full;
+    const paymentPlanId = JSONLoader.dictCasco.payment_plan.onetime;
     const paymentScheduleResponse = await cascoAPI
       .getPaymentSchedule(policyId, startDate, paymentPlanId);
     paymentScheduleResponse.status.should.be.equal(200);
