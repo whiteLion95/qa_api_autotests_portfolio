@@ -57,21 +57,21 @@ class CascoAPI extends BaseAPI {
     const response = await this.#API.put(`${JSONLoader.APIEndpoints.casco.policies}/${policyId}/vehicles/${vehicleId}`, payload);
 
     if (response.status === 200) {
-      Logger.log(`Vehicle with ID: ${vehicleId} for Policy ID: ${policyId} updated. Payload: ${JSON.stringify(payload)}`);
+      Logger.log(`Vehicle with ID: ${vehicleId} for Policy ID: ${policyId} updated`);
     }
 
     return response;
   }
 
   async getTariffs(params = {}) {
-    const baseParams = JSONLoader.getTariffsParams;
+    const requestParams = {
+      ...JSONLoader.getTariffsParams,
+      ...params,
+    };
 
     const response = await this.#API.get(
       JSONLoader.APIEndpoints.casco.tariffs,
-      {
-        ...baseParams,
-        ...params,
-      },
+      requestParams,
     );
 
     return response;
@@ -105,41 +105,36 @@ class CascoAPI extends BaseAPI {
   async getInsurancePeriods(params = {}) {
     const response = await this.#API.get(
       JSONLoader.APIEndpoints.casco.insurancePeriods,
-      {
-        ...params,
-      },
+      params,
     );
 
     return response;
   }
 
-  async getPaymentSchedule(policyId, startDate, paymentPlanId) {
+  /* eslint camelcase: ["error", {allow: ["start_date", "payment_plan_id"]}] */
+  async getPaymentSchedule(policyId, start_date, payment_plan_id) {
+    const params = {
+      start_date,
+      payment_plan_id,
+    };
+
     const response = await this.#API.get(
       `${JSONLoader.APIEndpoints.casco.policies}/${policyId}/payment/schedule`,
-      {
-        start_date: startDate,
-        payment_plan_id: paymentPlanId,
-      },
-    );
-
-    return response;
-  }
-
-  async getPaymentPlans() {
-    const response = await this.#API.get(
-      JSONLoader.APIEndpoints.casco['payment-plans'],
+      params,
     );
 
     return response;
   }
 
   async issuePolicy(policyId, payload) {
+    const params = {
+      ...payload,
+      status: JSONLoader.dictCasco.policy_status.issued,
+    };
+
     const response = await this.#API.put(
       `${JSONLoader.APIEndpoints.casco.policies}/${policyId}`,
-      {
-        ...payload,
-        status: JSONLoader.dictCasco.policy_status.issued,
-      },
+      params,
     );
 
     if (response.status === 200) {
@@ -150,11 +145,13 @@ class CascoAPI extends BaseAPI {
   }
 
   async cancelPolicy(policyId) {
+    const params = {
+      status: JSONLoader.dictCasco.policy_status.cancelled,
+    };
+
     const response = await this.#API.put(
       `${JSONLoader.APIEndpoints.casco.policies}/${policyId}`,
-      {
-        status: JSONLoader.dictCasco.policy_status.cancelled,
-      },
+      params,
     );
 
     if (response.status === 200) {
