@@ -34,5 +34,9 @@
   "deletePolicy": {
     "success": true,
     "message": "Полис успешно удален."
+  },
+  "getPolicy": {
+    "success": true,
+    "message": "Полис успешно получен."
   }
 }
