@@ -2,7 +2,4 @@
 node_modules/
 test/main/utils/data/JSONLoader.js
 .split-config.yml
-test/resources/data/testClients.json
-test/resources/data/testCars.json
-/.idea/
 .vscode/
