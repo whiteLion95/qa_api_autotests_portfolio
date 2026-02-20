@@ -111,10 +111,16 @@
                             "type": "null"
                         },
                         "insurance_sum": {
-                            "type": "integer"
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
                         },
                         "market_value": {
-                            "type": "null"
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
                         },
                         "currency": {
                             "type": "string"
