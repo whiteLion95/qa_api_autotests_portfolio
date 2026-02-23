@@ -52,10 +52,11 @@ exports.issuePolicy = function () { // eslint-disable-line func-names
 
     const insurancePeriodsResponse = await cascoAPI.getInsurancePeriods({ program_id: programId });
     insurancePeriodsResponse.status.should.be.equal(200);
-    const randomInsurancePeriodId = Randomizer
+    const randomInsurancePeriodIndex = Randomizer
       .getRandomInteger(insurancePeriodsResponse.data.data.length, 1);
-    const insurancePeriodInMonths = insurancePeriodsResponse
-      .data.data[randomInsurancePeriodId - 1].months_value;
+    const randomInsurancePeriod = insurancePeriodsResponse
+      .data.data[randomInsurancePeriodIndex - 1];
+    const insurancePeriodInMonths = randomInsurancePeriod.months_value;
     const startDateMoment = moment().add(1, 'days');
     const startDate = startDateMoment.format(DateFormats.DMY);
     const endDate = startDateMoment.clone()
@@ -82,7 +83,7 @@ exports.issuePolicy = function () { // eslint-disable-line func-names
 
     Logger.log('Issuing policy...');
     const issuePolicyPayload = {
-      insurance_period_id: randomInsurancePeriodId,
+      insurance_period_id: randomInsurancePeriod.id,
       start_date: startDate,
       end_date: endDate,
     };
