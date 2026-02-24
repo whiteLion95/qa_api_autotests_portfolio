@@ -56,7 +56,7 @@ exports.issuePolicy = function () { // eslint-disable-line func-names
     const randomInsurancePeriod = insurancePeriodsResponse
       .data.data[randomInsurancePeriodIndex - 1];
     const insurancePeriodInMonths = randomInsurancePeriod.months_value;
-    const { startDate, endDate } = TimeUtils.getDatesInterval(insurancePeriodInMonths, 'months');
+    const { startDate, finishDate } = TimeUtils.getDatesInterval(insurancePeriodInMonths, 'months');
 
     const paymentPlanId = JSONLoader.dictCasco.payment_plan.onetime;
     const paymentScheduleResponse = await cascoAPI
@@ -79,7 +79,7 @@ exports.issuePolicy = function () { // eslint-disable-line func-names
     const issuePolicyPayload = {
       insurance_period_id: randomInsurancePeriod.id,
       start_date: startDate,
-      end_date: endDate,
+      end_date: finishDate,
     };
     const issuePolicyResponse = await cascoAPI.issuePolicy(policyId, issuePolicyPayload);
     issuePolicyResponse.status.should.be.equal(200);
