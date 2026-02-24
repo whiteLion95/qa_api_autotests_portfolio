@@ -1,5 +1,4 @@
-const { Logger, Randomizer, DateFormats } = require('@amanat-qa/utils-backend');
-const moment = require('moment');
+const { Logger, Randomizer, TimeUtils } = require('@amanat-qa/utils-backend');
 const cascoAPI = require('../API/cascoAPI');
 const JSONLoader = require('../../main/utils/data/JSONLoader');
 
@@ -57,12 +56,7 @@ exports.issuePolicy = function () { // eslint-disable-line func-names
     const randomInsurancePeriod = insurancePeriodsResponse
       .data.data[randomInsurancePeriodIndex - 1];
     const insurancePeriodInMonths = randomInsurancePeriod.months_value;
-    const startDateMoment = moment().add(1, 'days');
-    const startDate = startDateMoment.format(DateFormats.DMY);
-    const endDate = startDateMoment.clone()
-      .add(insurancePeriodInMonths, 'months')
-      .add(-1, 'days')
-      .format(DateFormats.DMY);
+    const { startDate, endDate } = TimeUtils.getDatesInterval(insurancePeriodInMonths, 'months');
 
     const paymentPlanId = JSONLoader.dictCasco.payment_plan.onetime;
     const paymentScheduleResponse = await cascoAPI
