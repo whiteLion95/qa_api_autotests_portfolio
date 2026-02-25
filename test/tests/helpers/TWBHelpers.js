@@ -1,5 +1,4 @@
-const moment = require('moment');
-const { DateFormats } = require('@amanat-qa/utils-backend');
+const { TimeUtils } = require('@amanat-qa/utils-backend');
 const TWBAPI = require('../API/TWBAPI');
 const onesDB = require('../DB/onesDB');
 const onesAPI = require('../API/onesAPI');
@@ -21,9 +20,8 @@ class TWBHelpers {
     response.data.should.containSubset(
       JSONLoader.templateResponse.setPolicyTWB,
     );
-    const today = moment().format(DateFormats.DMY);
     response.data.message.should.be.equal(
-      `Договор №${policyNumber} от ${today} успешно создан!`,
+      `Договор №${policyNumber} от ${TimeUtils.today()} успешно создан!`,
     );
   }
 
