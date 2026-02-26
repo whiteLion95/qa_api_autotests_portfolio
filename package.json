@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "@amanat-qa/utils-backend": "^5.2.0",
+    "@amanat-qa/utils-backend": "^5.2.1",
     "allure-commandline": "^2.23.1",
     "allure-mocha": "^2.4.0",
     "axios": "^1.4.0",
