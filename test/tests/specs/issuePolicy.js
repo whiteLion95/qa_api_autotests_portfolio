@@ -25,6 +25,7 @@ exports.issuePolicy = function () { // eslint-disable-line func-names
       market_value: createVehicleResponse.data.data.pivot.insurance_sum,
       insurance_sum: createVehicleResponse.data.data.pivot.insurance_sum,
       tariff_id: randomTariff.id,
+      tariff_value: randomTariff.value,
     };
     const setTariffResponse = await cascoAPI
       .updatePolicyVehicle(policyId, vehicleId, setTariffPayload);

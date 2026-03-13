@@ -14,6 +14,7 @@ exports.setTariffForPolicyVehicle = function () { // eslint-disable-line func-na
       market_value: this.vehicle.pivot.insurance_sum,
       insurance_sum: this.vehicle.pivot.insurance_sum,
       tariff_id: randomTariff.id,
+      tariff_value: randomTariff.value,
     };
 
     const response = await cascoAPI.updatePolicyVehicle(this.policyId, this.vehicle.id, payload);
