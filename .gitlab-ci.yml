@@ -1,7 +1,10 @@
 stages:
+  - lint-e2e-autotests
   - generate-config
   - e2e-tests
 
 include:
+  - project: 'amanatpolicy/devops/test'
+    file: 'lint-e2e-autotests.yml'
   - project: 'amanatpolicy/devops/test'
     file: 'e2e-test-split.yml'
