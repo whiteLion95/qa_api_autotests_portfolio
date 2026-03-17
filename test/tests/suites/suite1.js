@@ -2,7 +2,7 @@ const { suiteHooks, caseHooks, itHooks } = require('../../main/hooks');
 const { issuePolicy } = require('../specs/issuePolicy');
 const { setPolicyToTWB } = require('../specs/setPolicyToTWB');
 const { cancelPolicy } = require('../specs/cancelPolicy');
-const { setCancellationToTWB } = require('../specs/setCancellationToTWB');
+const { setCancellationTWB } = require('../specs/setCancellationTWB');
 
 describe('e2e - Set and cancel policy', function () { // eslint-disable-line func-names
   suiteHooks({ suiteTitle: this.title });
@@ -14,6 +14,6 @@ describe('e2e - Set and cancel policy', function () { // eslint-disable-line fun
     issuePolicy();
     setPolicyToTWB();
     cancelPolicy();
-    setCancellationToTWB();
+    setCancellationTWB();
   });
 });
