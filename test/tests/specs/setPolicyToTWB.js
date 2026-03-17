@@ -10,6 +10,7 @@ exports.setPolicyToTWB = function () { // eslint-disable-line func-names
     } else {
       await TWBHelpers.setPolicyDirectly(this.policyNumber);
     }
+
     await TWBHelpers.verifyIssuedPolicy(this.policyNumber);
   });
 };

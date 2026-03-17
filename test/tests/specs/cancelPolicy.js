@@ -17,7 +17,12 @@ exports.cancelPolicy = function () { // eslint-disable-line func-names
         .should.be.equal(JSONLoader.dictCasco.policy_status.cancelled);
     }
 
-    await TWBHelpers.startSetPolicyWaiting();
+    if (JSONLoader.configData.setPolicyWaitingTWB) {
+      await TWBHelpers.startSetPolicyWaiting();
+    } else {
+      await TWBHelpers.setCancellation(this.policyNumber);
+    }
+
     await TWBHelpers.verifyCancelledPolicy(this.policyNumber);
   });
 };
