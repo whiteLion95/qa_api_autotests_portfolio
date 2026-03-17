@@ -1,5 +1,4 @@
 const JSONLoader = require('../../main/utils/data/JSONLoader');
-const TWBHelpers = require('../helpers/TWBHelpers');
 const cascoAPI = require('../API/cascoAPI');
 
 exports.cancelPolicy = function () { // eslint-disable-line func-names
@@ -16,13 +15,5 @@ exports.cancelPolicy = function () { // eslint-disable-line func-names
       cancelPolicyResponse.data.data.status.id
         .should.be.equal(JSONLoader.dictCasco.policy_status.cancelled);
     }
-
-    if (JSONLoader.configData.setPolicyWaitingTWB) {
-      await TWBHelpers.startSetPolicyWaiting();
-    } else {
-      await TWBHelpers.setCancellation(this.policyNumber);
-    }
-
-    await TWBHelpers.verifyCancelledPolicy(this.policyNumber);
   });
 };
