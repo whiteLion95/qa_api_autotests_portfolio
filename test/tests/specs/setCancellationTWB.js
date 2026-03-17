@@ -6,7 +6,7 @@ exports.setCancellationTWB = function () { // eslint-disable-line func-names
     if (JSONLoader.configData.setPolicyWaitingTWB) {
       await TWBHelpers.startSetPolicyWaiting();
     } else {
-      await TWBHelpers.setCancellation(this.policyNumber);
+      await TWBHelpers.setCancellationDirectly(this.policyNumber);
     }
 
     await TWBHelpers.verifyCancelledPolicy(this.policyNumber);

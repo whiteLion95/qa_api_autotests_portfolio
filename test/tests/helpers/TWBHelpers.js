@@ -25,6 +25,17 @@ class TWBHelpers {
     );
   }
 
+  static async setCancellationDirectly(policyNumber) {
+    const response = await TWBAPI.setCancellation(policyNumber);
+    response.status.should.be.equal(200);
+    response.data.should.containSubset(
+      JSONLoader.templateResponse.setCancellationTWB,
+    );
+    response.data.message.should.be.equal(
+      `Договор №${policyNumber} от ${TimeUtils.today()} успешно аннулирован!`,
+    );
+  }
+
   static async verifyIssuedPolicy(policyNumber) {
     const getPolicyResponse = JSONLoader.configData.getPolicyTWB
       ? await TWBAPI.getPolicy(policyNumber)

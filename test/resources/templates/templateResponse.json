@@ -38,5 +38,8 @@
   "getPolicy": {
     "success": true,
     "message": "Полис успешно получен."
+  },
+  "setCancellationTWB": {
+    "status": 1
   }
 }
