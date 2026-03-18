@@ -605,9 +605,6 @@
                                         "basic_tariff": {
                                             "type": "number"
                                         },
-                                        "revision_type_id": {
-                                            "type": "integer"
-                                        },
                                         "sales_channel_id_1c": {
                                             "type": ["integer", "null"]
                                         },
@@ -631,21 +628,6 @@
                                         },
                                         "deleted_at": {
                                             "type": "null"
-                                        },
-                                        "revision_type": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "type": "integer"
-                                                },
-                                                "title": {
-                                                    "type": "string"
-                                                }
-                                            },
-                                            "required": [
-                                                "id",
-                                                "title"
-                                            ]
                                         }
                                     },
                                     "required": [
@@ -654,7 +636,6 @@
                                         "title",
                                         "alias",
                                         "basic_tariff",
-                                        "revision_type_id",
                                         "sales_channel_id_1c",
                                         "status_id",
                                         "start_date",
@@ -662,8 +643,7 @@
                                         "approval_date",
                                         "created_at",
                                         "updated_at",
-                                        "deleted_at",
-                                        "revision_type"
+                                        "deleted_at"
                                     ]
                                 }
                             },
