@@ -82,6 +82,8 @@ exports.issuePolicy = function () { // eslint-disable-line func-names
       insurance_period_id: randomInsurancePeriod.id,
       start_date: startDate,
       end_date: finishDate,
+      signatory_holder: JSONLoader.signatoryHolderParams,
+      signatory_insurer: JSONLoader.signatoryInsurerParams,
     };
     const issuePolicyResponse = await cascoAPI.issuePolicy(policyId, issuePolicyPayload);
     issuePolicyResponse.status.should.be.equal(200);
