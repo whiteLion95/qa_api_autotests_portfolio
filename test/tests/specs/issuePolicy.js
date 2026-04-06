@@ -39,6 +39,7 @@ exports.issuePolicy = function () { // eslint-disable-line func-names
     Logger.log('Creating beneficiary for policy...');
     const beneficiaryPayload = JSONLoader.createClientPayloads.natural_person_residents[1];
     beneficiaryPayload.type_id = JSONLoader.dictCasco.client_type.beneficiary_both;
+    beneficiaryPayload.is_static = 0;
     const createBeneficiaryResponse = await cascoAPI.createClient(policyId, beneficiaryPayload);
     createBeneficiaryResponse.status.should.be.equal(200);
 
@@ -84,6 +85,7 @@ exports.issuePolicy = function () { // eslint-disable-line func-names
       end_date: finishDate,
       signatory_holder: JSONLoader.signatoryHolderParams,
       signatory_insurer: JSONLoader.signatoryInsurerParams,
+      pledge_agreement: false,
     };
     const issuePolicyResponse = await cascoAPI.issuePolicy(policyId, issuePolicyPayload);
     issuePolicyResponse.status.should.be.equal(200);
