@@ -125,9 +125,6 @@
                         "currency": {
                             "type": "string"
                         },
-                        "no_revision_reason_id": {
-                            "type": "null"
-                        },
                         "is_new": {
                             "type": "boolean"
                         },
@@ -150,7 +147,6 @@
                         "insurance_sum",
                         "market_value",
                         "currency",
-                        "no_revision_reason_id",
                         "is_new",
                         "created_at",
                         "updated_at",
