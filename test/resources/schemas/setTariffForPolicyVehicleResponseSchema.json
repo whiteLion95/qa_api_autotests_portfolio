@@ -122,9 +122,6 @@
                         "calculated_premium": {
                             "type": "null"
                         },
-                        "no_revision_reason_id": {
-                            "type": "null"
-                        },
                         "currency": {
                             "type": "string"
                         },
@@ -689,7 +686,6 @@
                         "underinsurance_sum",
                         "premium",
                         "calculated_premium",
-                        "no_revision_reason_id",
                         "currency",
                         "exchange_rate",
                         "created_at",
