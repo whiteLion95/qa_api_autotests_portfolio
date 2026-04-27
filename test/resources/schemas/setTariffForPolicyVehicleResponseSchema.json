@@ -114,7 +114,10 @@
                             "type": "integer"
                         },
                         "underinsurance_sum": {
-                            "type": "integer"
+                            "type": [
+                                "integer",
+                                "null"
+                            ]
                         },
                         "premium": {
                             "type": "number"
@@ -144,7 +147,10 @@
                                     "type": "integer"
                                 },
                                 "user_id": {
-                                    "type": ["integer", "null"]
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ]
                                 },
                                 "damage_franchise_id": {
                                     "type": "integer"
@@ -177,10 +183,16 @@
                                     "type": "integer"
                                 },
                                 "program_vehicle_model_id": {
-                                    "type": ["integer", "null"]
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ]
                                 },
                                 "manufacture_country_id": {
-                                    "type": ["integer", "null"]
+                                    "type": [
+                                        "integer",
+                                        "null"
+                                    ]
                                 },
                                 "agent_commission": {
                                     "type": "number"
@@ -219,10 +231,16 @@
                                             "type": "integer"
                                         },
                                         "country_group_id": {
-                                            "type": ["integer", "null"]
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ]
                                         },
                                         "country_id": {
-                                            "type": ["integer", "null"]
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ]
                                         },
                                         "coefficient": {
                                             "type": "number"
@@ -258,7 +276,10 @@
                                             "type": "integer"
                                         },
                                         "linked_id": {
-                                            "type": ["integer", "null"]
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ]
                                         },
                                         "program_id": {
                                             "type": "integer"
@@ -267,19 +288,31 @@
                                             "type": "integer"
                                         },
                                         "product_id_1c": {
-                                            "type": ["integer", "null"]
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ]
                                         },
                                         "payment_condition_id": {
-                                            "type": ["integer", "null"]
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ]
                                         },
                                         "coefficient": {
                                             "type": "number"
                                         },
                                         "min_insurance_sum": {
-                                            "type": ["integer", "null"]
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ]
                                         },
                                         "max_insurance_sum": {
-                                            "type": ["integer", "null"]
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ]
                                         },
                                         "created_at": {
                                             "type": "string"
@@ -309,10 +342,16 @@
                                                     "type": "number"
                                                 },
                                                 "min_sum": {
-                                                    "type": ["integer", "null"]
+                                                    "type": [
+                                                        "integer",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "max_sum": {
-                                                    "type": ["integer", "null"]
+                                                    "type": [
+                                                        "integer",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "created_at": {
                                                     "type": "string"
@@ -426,7 +465,10 @@
                                             "type": "integer"
                                         },
                                         "linked_id": {
-                                            "type": ["integer", "null"]
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ]
                                         },
                                         "program_id": {
                                             "type": "integer"
@@ -435,19 +477,31 @@
                                             "type": "integer"
                                         },
                                         "product_id_1c": {
-                                            "type": ["integer", "null"]
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ]
                                         },
                                         "payment_condition_id": {
-                                            "type": ["integer", "null"]
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ]
                                         },
                                         "coefficient": {
                                             "type": "number"
                                         },
                                         "min_insurance_sum": {
-                                            "type": ["integer", "null"]
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ]
                                         },
                                         "max_insurance_sum": {
-                                            "type": ["integer", "null"]
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ]
                                         },
                                         "created_at": {
                                             "type": "string"
@@ -477,10 +531,16 @@
                                                     "type": "number"
                                                 },
                                                 "min_sum": {
-                                                    "type": ["integer", "null"]
+                                                    "type": [
+                                                        "integer",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "max_sum": {
-                                                    "type": ["integer", "null"]
+                                                    "type": [
+                                                        "integer",
+                                                        "null"
+                                                    ]
                                                 },
                                                 "created_at": {
                                                     "type": "string"
@@ -603,7 +663,10 @@
                                             "type": "number"
                                         },
                                         "sales_channel_id_1c": {
-                                            "type": ["integer", "null"]
+                                            "type": [
+                                                "integer",
+                                                "null"
+                                            ]
                                         },
                                         "status_id": {
                                             "type": "integer"
@@ -615,7 +678,10 @@
                                             "type": "string"
                                         },
                                         "approval_date": {
-                                            "type": ["string", "null"]
+                                            "type": [
+                                                "string",
+                                                "null"
+                                            ]
                                         },
                                         "created_at": {
                                             "type": "string"
