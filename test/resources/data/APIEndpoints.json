@@ -1,0 +1,27 @@
+{
+  "auth": {
+    "login": "api/login",
+    "testUsers": "api/auth/test-users"
+  },
+  "dictionary": {
+    "verifyBool": "api/dictionary/settings/verify_bool",
+    "servers": "api/dictionary/settings/5"
+  },
+  "ones": {
+    "callMethod": "api/ones/v2/ones/call-method"
+  },
+  "ESBD": {
+    "callMethod": "api/esbd/call-method"
+  },
+  "TWB": {
+    "startSetPolicyWaiting": "StartSetPolicyWaiting",
+    "getPolicy": "GetPolicy",
+    "setPolicy": "SetPolicy",
+    "setCancellation": "SetCancellation"
+  },
+  "casco": {
+    "policies": "api/casco/policies",
+    "tariffs": "api/casco/tariffs",
+    "insurancePeriods": "api/casco/insurance-periods"
+  }
+}

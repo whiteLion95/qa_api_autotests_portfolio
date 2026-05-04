@@ -1,0 +1,45 @@
+{
+  "createPolicyDraft": {
+    "success": true,
+    "message": "Полис успешно создан."
+  },
+  "createVehicle": {
+    "success": true,
+    "message": "Транспортное средство успешно занесено в полис и в ЕСБД"
+  },
+  "updatePolicyVehicle": {
+    "success": true,
+    "message": "Транспортное средство в полисе успешно обновлено"
+  },
+  "cancelPolicy": {
+    "success": true,
+    "message": "Полис успешно отменен."
+  },
+  "setPolicyTWB": {
+    "status": 1
+  },
+  "startSetPolicyWaiting": {
+    "status": 1,
+    "message": "Success"
+  },
+  "getCancelledPolicyTWB": {
+    "contracts": [],
+    "status": false,
+    "errors": {
+      "contracts": [
+        "Данные отсутствуют или договор помечен на удаление!"
+      ]
+    }
+  },
+  "deletePolicy": {
+    "success": true,
+    "message": "Полис успешно удален."
+  },
+  "getPolicy": {
+    "success": true,
+    "message": "Полис успешно получен."
+  },
+  "setCancellationTWB": {
+    "status": 1
+  }
+}

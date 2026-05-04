@@ -1,0 +1,204 @@
+{
+    "title": "get policy response schema",
+    "type": "object",
+    "properties": {
+        "success": {
+            "type": "boolean"
+        },
+        "message": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "esbd_id": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "global_id": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "external_id": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "program_id": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "depreciation_type_id": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "insurance_period_id": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "payment_condition_id": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "product_id_1c": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "status_id": {
+                    "type": "integer"
+                },
+                "number": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "premium": {
+                    "type": [
+                        "number",
+                        "null"
+                    ]
+                },
+                "insurance_sum": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "subagent_id": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "agent_id": {
+                    "type": [
+                        "integer",
+                        "null"
+                    ]
+                },
+                "manager_id": {
+                    "type": "integer"
+                },
+                "user_id": {
+                    "type": "integer"
+                },
+                "start_date": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "end_date": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "status": {
+                    "type": "object",
+                    "properties": {
+                        "id": {
+                            "type": "integer"
+                        },
+                        "title": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "id",
+                        "title"
+                    ]
+                },
+                "depreciation_type": {
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "insurance_period": {
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "payment_condition": {
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "program": {
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "payment": {
+                    "type": [
+                        "object",
+                        "null"
+                    ]
+                },
+                "clients": {
+                    "type": "array"
+                },
+                "vehicles": {
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "esbd_id",
+                "global_id",
+                "external_id",
+                "program_id",
+                "depreciation_type_id",
+                "insurance_period_id",
+                "payment_condition_id",
+                "product_id_1c",
+                "status_id",
+                "number",
+                "premium",
+                "insurance_sum",
+                "subagent_id",
+                "agent_id",
+                "manager_id",
+                "user_id",
+                "start_date",
+                "end_date",
+                "status",
+                "depreciation_type",
+                "insurance_period",
+                "payment_condition",
+                "program",
+                "payment",
+                "clients",
+                "vehicles"
+            ]
+        }
+    },
+    "required": [
+        "success",
+        "message",
+        "data"
+    ]
+}

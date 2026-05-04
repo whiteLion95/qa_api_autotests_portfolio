@@ -1,0 +1,25 @@
+{
+  "policy_status": {
+    "draft": 1,
+    "terminated": 3,
+    "cancelled": 6,
+    "issued": 8,
+    "waiting_payment": 10,
+    "paid": 11,
+    "pending": 12
+  },
+  "payment_plan": {
+    "onetime": 1,
+    "three_months": 2,
+    "six_months": 3,
+    "twelve_months": 4,
+    "quarterly": 5
+  },
+  "client_type": {
+    "holder": 1,
+    "insured": 2,
+    "beneficiary_damage": 3,
+    "beneficicary_loss": 4,
+    "beneficiary_both": 5
+  }
+}

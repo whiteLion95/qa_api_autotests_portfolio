@@ -1,0 +1,39 @@
+{
+  "devDependencies": {
+    "@amanat-qa/utils-backend": "^5.2.1",
+    "allure-commandline": "^2.23.1",
+    "allure-mocha": "^2.4.0",
+    "axios": "^1.4.0",
+    "chai": "^4.3.7",
+    "chai-json-schema": "^1.5.1",
+    "chai-subset": "^1.6.0",
+    "dotenv": "^16.3.1",
+    "eslint": "^8.56.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "js-yaml": "^4.1.0",
+    "mocha": "^10.2.0",
+    "moment": "^2.29.4",
+    "moment-business-days": "^1.2.0",
+    "moment-timezone": "^0.5.45",
+    "mysql2": "^3.16.1",
+    "sequelize": "^6.37.7"
+  },
+  "scripts": {
+    "eslint": "eslint --ext .js .",
+    "eslint:fix": "eslint --fix --ext .js .",
+    "lint": "npm run config && npm run eslint",
+    "lint:fix": "npm run config && npm run eslint:fix",
+    "config": "node ./node_modules/@amanat-qa/utils-backend/dist/data/filesParser.js",
+    "config:split": "node ./node_modules/@amanat-qa/utils-backend/dist/data/filesParser.js --setPolicyWaitingTWB",
+    "config:parallel": "node ./node_modules/@amanat-qa/utils-backend/dist/data/filesParser.js --parallel",
+    "ci:generate": "node ./node_modules/@amanat-qa/utils-backend/dist/data/gitlabCIGenerator.js",
+    "mocha:run": "mocha test/tests/suites/*.js --timeout 240000 --require test/main/baseTest --reporter allure-mocha --reporter-options resultsDir=./test/artifacts/allure-results --bail",
+    "mocha:run:split": "mocha test/tests/suites/*$SPEC_PATTERN.js --timeout 240000 --require test/main/baseTest --reporter allure-mocha --reporter-options resultsDir=./test/artifacts/allure-results --bail --retries 3",
+    "mocha:run:parallel": "find test/tests/suites/ -name 'suite*.js' | parallel -j2 mocha {} --timeout 2400000 --require test/main/baseTest --reporter allure-mocha --reporter-options resultsDir=./test/artifacts/allure-results --bail --retries 3",
+    "test": "npm run config && npm run allure:clean && npm run mocha:run",
+    "test:split": "npm run config:split && npm run allure:clean && npm run mocha:run:split",
+    "test:parallel": "npm run config:parallel && npm run allure:clean && npm run mocha:run:parallel",
+    "test:debug": "node --inspect-brk -r ts-node/register node_modules/mocha/bin/_mocha -- test/tests/specs/*.js --timeout 20000 --require test/main/baseTest --reporter allure-mocha --bail",
+    "allure:clean": "rm -rf test/artifacts/allure-results test/artifacts/allure-report"
+  }
+}
